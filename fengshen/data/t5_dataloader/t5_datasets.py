@@ -113,6 +113,11 @@ class UnsuperviseT5Dataset(Dataset):
     def load_data(self, data_path):
         # TODO: large data process
         #from data.fs_datasets import load_dataset
+
+        if self.args.overwrite_cache:
+            from datasets import set_caching_enabled
+            set_caching_enabled(False)
+            
         from datasets import load_dataset
         samples = load_dataset("csv",
                                download_mode='force_redownload' if self.args.overwrite_cache else 'reuse_dataset_if_exists',
