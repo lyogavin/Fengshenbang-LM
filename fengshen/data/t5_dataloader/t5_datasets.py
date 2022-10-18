@@ -114,7 +114,7 @@ class UnsuperviseT5Dataset(Dataset):
         # TODO: large data process
         #from data.fs_datasets import load_dataset
         from datasets import load_dataset
-        samples = load_dataset("csv",
+        samples = load_dataset(f"csv-{self.args.dataset_name}",
                                download_mode='force_redownload' if self.args.overwrite_cache else 'reuse_dataset_if_exists',
                                data_files={
                                    'train': '/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz'})['train']
@@ -207,6 +207,7 @@ class UnsuperviseT5DataModel(pl.LightningDataModule):
         parser.add_argument('--train_split_size', default=None, type=float)
         parser.add_argument('--tokenizer_type', default='t5_tokenizer', choices=['t5_tokenizer', 'bert_tokenizer'])
         parser.add_argument('--text_column_name', default='text')
+        parser.add_argument('--dataset_name', default='all_title_content')
         parser.add_argument('--overwrite_cache', action='store_true')
         return parent_args
 
