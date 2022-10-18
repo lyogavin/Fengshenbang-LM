@@ -102,9 +102,12 @@ TRAINER_ARGS="
     --save_ckpt_path $ROOT_DIR/ckpt \
 "
 # --accumulate_grad_batches 8 \
-DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz # for test
-#DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569.csv.gz
-VAL_DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz # for test
+# sample test
+#DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz # for test
+#VAL_DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz # for test
+# real train
+DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_train_1665986569.csv.gz
+VAL_DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_val_1665986569.csv.gz
 
 DATA_ARGS="
     --train_batchsize $MICRO_BATCH_SIZE \
