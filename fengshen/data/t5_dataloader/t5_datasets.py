@@ -119,6 +119,8 @@ class UnsuperviseT5Dataset(Dataset):
                                    'train': '/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz'})['train']
             # samples = datasets.load_from_disk(data_path)['train']
         # print(samples)
+        cols = list(samples.features.keys())
+        cols.remove('title_content')
         tokenized_datasets = samples.map(
             self.tokenize_function,
             batched=True,
@@ -127,7 +129,7 @@ class UnsuperviseT5Dataset(Dataset):
         ).map(
             batched=True,
             num_proc=self.dataset_num_workers,
-            remove_columns=self.remove_columns)
+            remove_columns=cols) #self.remove_columns)
         # Note that with `batched=True`, this map processes 1,000 texts together, so group_texts throws away a
         # remainder for each of those groups of 1,000 texts. You can adjust that batch_size here but a higher value
         # might be slower to preprocess.
@@ -571,3 +573,20 @@ class TaskT5DataModel(pl.LightningDataModule):
             pin_memory=True,
             num_workers=self.hparams.dataloader_num_workers
         )
+
+
+
+from transformers import AutoTokenizer
+tokenizer = AutoTokenizer.from_pretrained('IDEA-CCNL/Randeng-T5-784M')
+from datasets import load_dataset
+def tk(exms):
+    return tokenizer(exms['title_content'], add_special_tokens=False, return_attention_mask=False)
+#/tmp/bbb.csv'
+a = load_dataset("csv", data_files={'train': '/tmp/bbb.csv'})['train']
+
+#a = load_dataset("csv", data_files={'train': '/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz'})['train']
+b = a.map(tk,batched=True).map(batched=True)
+def aaa(x):
+    print(x.keys())
+
+c=b.map(aaa,batched=True)
