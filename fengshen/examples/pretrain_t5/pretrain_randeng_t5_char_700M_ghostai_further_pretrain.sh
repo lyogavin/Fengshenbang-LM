@@ -62,7 +62,7 @@ cat <<EOT > $config_json
   },
   "zero_allow_untested_optimizer": false,
   "fp16": {
-    "enabled": true,
+    "enabled": false,
     "loss_scale": 0,
     "loss_scale_window": 1000,
     "hysteresis": 2,
