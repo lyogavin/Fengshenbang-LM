@@ -123,6 +123,7 @@ DATA_ARGS="
     --val_data_path ${VAL_DATA_DIR} \
     --train_split_size 0.999 \
     --max_seq_length 512 \
+    --overwrite_cache \
 "
 
 MODEL_ARGS="

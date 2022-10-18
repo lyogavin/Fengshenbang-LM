@@ -84,6 +84,7 @@ class UnsuperviseT5Dataset(Dataset):
         self.remove_columns = args.remove_columns
         # whether load tokenieze data
         self.load_data_type = load_data_type
+        self.args = args
 
         if self.load_data_type == 0:
             # T5-like span masked language modeling will fuse consecutively masked tokens to a single sentinel token.
@@ -115,7 +116,7 @@ class UnsuperviseT5Dataset(Dataset):
         #from data.fs_datasets import load_dataset
         from datasets import load_dataset
         samples = load_dataset("csv",
-                               download_mode='force_redownload',
+                               download_mode='force_redownload' if self.args.overwrite_cache else 'reuse_dataset_if_exists',
                                data_files={
                                    'train': '/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz'})['train']
             # samples = datasets.load_from_disk(data_path)['train']
@@ -126,11 +127,13 @@ class UnsuperviseT5Dataset(Dataset):
             self.tokenize_function,
             batched=True,
             num_proc=self.dataset_num_workers,
-            # load_from_cache_file=not data_args.overwrite_cache,
+            load_from_cache_file=not self.args.overwrite_cache,
         ).map(
             batched=True,
             num_proc=self.dataset_num_workers,
-            remove_columns=cols) #self.remove_columns)
+            remove_columns=cols,
+            load_from_cache_file=not self.args.overwrite_cache
+        ) #self.remove_columns)
         # Note that with `batched=True`, this map processes 1,000 texts together, so group_texts throws away a
         # remainder for each of those groups of 1,000 texts. You can adjust that batch_size here but a higher value
         # might be slower to preprocess.
@@ -141,6 +144,7 @@ class UnsuperviseT5Dataset(Dataset):
             self.group_texts,
             batched=True,
             num_proc=self.dataset_num_workers,
+            load_from_cache_file=not self.args.overwrite_cache
             # load_from_cache_file=not data_args.overwrite_cache,
         )
         return tokenized_datasets
@@ -204,7 +208,7 @@ class UnsuperviseT5DataModel(pl.LightningDataModule):
         parser.add_argument('--train_split_size', default=None, type=float)
         parser.add_argument('--tokenizer_type', default='t5_tokenizer', choices=['t5_tokenizer', 'bert_tokenizer'])
         parser.add_argument('--text_column_name', default='text')
-        parser.add_argument('--remove_columns', nargs='+', default=[])
+        parser.add_argument('--overwrite_cache', action='store_true')
         return parent_args
 
     def __init__(self, args):
@@ -536,6 +540,7 @@ class TaskT5DataModel(pl.LightningDataModule):
         parser.add_argument('--tokenizer_type', default='t5_tokenizer', choices=['t5_tokenizer', 'bert_tokenizer'])
         parser.add_argument('--text_column_name', default='text')
         parser.add_argument('--remove_columns', nargs='+', default=[])
+        parser.add_argument('--remove_columns', nargs='+', default=[])
         return parent_args
 
     def __init__(self, args):
@@ -579,18 +584,3 @@ class TaskT5DataModel(pl.LightningDataModule):
         )
 
 
-
-from transformers import AutoTokenizer
-tokenizer = AutoTokenizer.from_pretrained('IDEA-CCNL/Randeng-T5-784M')
-from datasets import load_dataset
-def tk(exms):
-    return tokenizer(exms['title_content'], add_special_tokens=False, return_attention_mask=False)
-#/tmp/bbb.csv'
-a = load_dataset("csv", data_files={'train': '/tmp/bbb.csv'})['train']
-
-#a = load_dataset("csv", data_files={'train': '/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz'})['train']
-b = a.map(tk,batched=True).map(batched=True)
-def aaa(x):
-    print(x.keys())
-
-c=b.map(aaa,batched=True)
