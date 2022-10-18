@@ -24,7 +24,7 @@ ZERO_STAGE=1
 config_json="$ROOT_DIR/ds_config.randeng_t5_char_700M.$SLURM_JOBID.json"
 export MASTER_PORT=$[RANDOM%10000+30000]
 # export CUDA_VISIBLE_DEVICES='2,5'
-
+# smaller LR to avoid gradient overflow: https://github.com/microsoft/DeepSpeed/issues/1773
 cat <<EOT > $config_json
 {
   "train_micro_batch_size_per_gpu": ${MICRO_BATCH_SIZE},
@@ -52,7 +52,7 @@ cat <<EOT > $config_json
       "total_num_steps": 400000,
       "warmup_num_steps" : 10000
     },
-    "type": "WarmupDecayLR"  
+    "type": "WarmupDecayLR"
   },
   "zero_allow_untested_optimizer": false,
   "fp16": {
