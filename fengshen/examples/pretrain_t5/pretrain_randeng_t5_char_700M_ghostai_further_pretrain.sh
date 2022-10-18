@@ -124,7 +124,6 @@ DATA_ARGS="
     --train_split_size 0.999 \
     --max_seq_length 512 \
     --overwrite_cache \
-    --dataset_name all_title_content_1017 \
 "
 
 MODEL_ARGS="
