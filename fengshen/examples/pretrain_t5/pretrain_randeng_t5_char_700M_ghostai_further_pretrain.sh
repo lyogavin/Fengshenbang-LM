@@ -13,7 +13,7 @@ echo "START TIME: $(date)"
 MICRO_BATCH_SIZE=8
 ROOT_DIR=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/t5/
 if [ ! -d ${ROOT_DIR} ];then
-  mkdir ${ROOT_DIR}
+  mkdir -p ${ROOT_DIR}
   echo ${ROOT_DIR} created!!!!!!!!!!!!!!
 else
   echo ${ROOT_DIR} exist!!!!!!!!!!!!!!!
