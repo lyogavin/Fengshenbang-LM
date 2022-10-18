@@ -114,9 +114,10 @@ class UnsuperviseT5Dataset(Dataset):
         # TODO: large data process
         #from data.fs_datasets import load_dataset
         from datasets import load_dataset
-        samples = load_dataset(
+        samples = load_dataset("csv",
+                               data_files={
+                                   'train': '/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz'})['train']
             # samples = datasets.load_from_disk(data_path)['train']
-            data_path, num_proc=self.dataset_num_workers)['train']
         # print(samples)
         tokenized_datasets = samples.map(
             self.tokenize_function,
