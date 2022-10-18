@@ -112,7 +112,8 @@ class UnsuperviseT5Dataset(Dataset):
 
     def load_data(self, data_path):
         # TODO: large data process
-        from data.fs_datasets import load_dataset
+        #from data.fs_datasets import load_dataset
+        from datasets import load_dataset
         samples = load_dataset(
             # samples = datasets.load_from_disk(data_path)['train']
             data_path, num_proc=self.dataset_num_workers)['train']
@@ -199,16 +200,21 @@ class UnsuperviseT5DataModel(pl.LightningDataModule):
     def __init__(self, args):
         super().__init__()
         self.save_hyperparameters(args)
-        if args.train_split_size is not None:
-            from data.fs_datasets import load_dataset
-            data_splits = load_dataset(args.train_data_path, num_proc=args.dataset_num_workers)
-            train_split = data_splits['train']
-            test_split = data_splits['test']
-            print('train:', train_split, '\ntest_data:', test_split)
-            self.train_dataset = UnsuperviseT5Dataset('', args, load_data_type=2, data=train_split)
-            self.test_dataset = UnsuperviseT5Dataset('', args, load_data_type=2, data=test_split)
+        ALWAYS_LOAD_RAW = True
+
+        if ALWAYS_LOAD_RAW:
+            self.train_data = UnsuperviseT5Dataset(args.train_data_path, args, load_data_type=0)
         else:
-            self.train_data = UnsuperviseT5Dataset(args.train_data_path, args, load_data_type=1)
+            if args.train_split_size is not None:
+                from data.fs_datasets import load_dataset
+                data_splits = load_dataset(args.train_data_path, num_proc=args.dataset_num_workers)
+                train_split = data_splits['train']
+                test_split = data_splits['test']
+                print('train:', train_split, '\ntest_data:', test_split)
+                self.train_dataset = UnsuperviseT5Dataset('', args, load_data_type=2, data=train_split)
+                self.test_dataset = UnsuperviseT5Dataset('', args, load_data_type=2, data=test_split)
+            else:
+                self.train_data = UnsuperviseT5Dataset(args.train_data_path, args, load_data_type=1)
 
         self.config = MT5Config.from_pretrained(args.pretrained_model_path)
         self.noise_density = 0.15
