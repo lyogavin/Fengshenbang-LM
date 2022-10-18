@@ -210,7 +210,7 @@ class UnsuperviseT5DataModel(pl.LightningDataModule):
         ALWAYS_LOAD_RAW = True
 
         if ALWAYS_LOAD_RAW:
-            self.train_data = UnsuperviseT5Dataset(args.train_data_path, args, load_data_type=0)
+            self.train_dataset = UnsuperviseT5Dataset(args.train_data_path, args, load_data_type=0)
         else:
             if args.train_split_size is not None:
                 from data.fs_datasets import load_dataset
