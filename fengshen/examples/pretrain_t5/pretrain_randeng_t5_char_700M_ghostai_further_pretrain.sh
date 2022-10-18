@@ -10,7 +10,7 @@
 set -x -e
 
 echo "START TIME: $(date)"
-MICRO_BATCH_SIZE=2
+MICRO_BATCH_SIZE=4
 ROOT_DIR=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/t5/
 if [ ! -d ${ROOT_DIR} ];then
   mkdir -p ${ROOT_DIR}
@@ -81,6 +81,8 @@ strategy=deepspeed_stage_1
 
     #--dirpath $ROOT_DIR/ckpt \
 
+# val_check_interval 0.25 check validation set 4 times during a training epoch
+# every_n_train_steps (Optional[int]) – Number of training steps between checkpoints.
 TRAINER_ARGS="
     --max_epochs 1 \
     --gpus 1 \
@@ -92,11 +94,12 @@ TRAINER_ARGS="
     --monitor train_loss \
     --mode min \
     --save_last \
-    --val_check_interval 0.1 \
+    --val_check_interval 0.5 \
     --dataset_num_workers 4 \
     --dataloader_num_workers 4 \
     --replace_sampler_ddp False \
     --accumulate_grad_batches 2 \
+    --save_ckpt_path $ROOT_DIR/ckpt \
 "
 # --accumulate_grad_batches 8 \
 DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz # for test
