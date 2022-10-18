@@ -79,13 +79,14 @@ export PL_DEEPSPEED_CONFIG_PATH=$config_json
 # strategy=ddp
 strategy=deepspeed_stage_1
 
+    #--dirpath $ROOT_DIR/ckpt \
+    
 TRAINER_ARGS="
     --max_epochs 1 \
     --gpus 1 \
     --num_nodes 1 \
     --strategy ${strategy} \
     --default_root_dir $ROOT_DIR \
-    #--dirpath $ROOT_DIR/ckpt \
     --save_top_k 3 \
     --every_n_train_steps 100000 \
     --monitor train_loss \
