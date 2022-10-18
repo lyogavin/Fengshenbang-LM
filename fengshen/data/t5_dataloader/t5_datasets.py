@@ -165,8 +165,12 @@ class UnsuperviseT5Dataset(Dataset):
     # and generate chunks of expanded_inputs_length.
     def group_texts(self, examples):
         # Concatenate all texts.
-        concatenated_examples = {
-            k: list(chain(*examples[k])) for k in examples.keys()}
+        try:
+            concatenated_examples = {
+                k: list(chain(*examples[k])) for k in examples.keys()}
+        except TypeError as e:
+            print(f"{examples}, {examples.keys()}")
+            raise e
         total_length = len(concatenated_examples[list(examples.keys())[0]])
         # We drop the small remainder, we could add padding if the model supported it instead of this drop, you can
         # customize this part to your needs.
