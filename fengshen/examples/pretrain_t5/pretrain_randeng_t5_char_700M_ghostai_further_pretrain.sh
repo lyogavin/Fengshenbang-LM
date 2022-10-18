@@ -9,6 +9,9 @@
 
 set -x -e
 
+run_ts=$(date +%s)
+echo "RUN TS: $(run_ts)"
+
 echo "START TIME: $(date)"
 MICRO_BATCH_SIZE=4
 ROOT_DIR=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/t5/
@@ -23,6 +26,9 @@ ZERO_STAGE=1
 
 config_json="$ROOT_DIR/ds_config.randeng_t5_char_700M.$SLURM_JOBID.json"
 export MASTER_PORT=$[RANDOM%10000+30000]
+checkpoint_path=$ROOT_DIR/ckpt_$run_ts
+
+echo "checkpoint @ $checkpoint_path"
 # export CUDA_VISIBLE_DEVICES='2,5'
 
 cat <<EOT > $config_json
@@ -99,7 +105,7 @@ TRAINER_ARGS="
     --dataloader_num_workers 4 \
     --replace_sampler_ddp False \
     --accumulate_grad_batches 2 \
-    --save_ckpt_path $ROOT_DIR/ckpt \
+    --save_ckpt_path $checkpoint_path \
 "
 # --accumulate_grad_batches 8 \
 # sample test
