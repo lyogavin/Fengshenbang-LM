@@ -101,12 +101,14 @@ TRAINER_ARGS="
 # --accumulate_grad_batches 8 \
 DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz # for test
 #DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569.csv.gz
+VAL_DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz # for test
 
 DATA_ARGS="
     --train_batchsize $MICRO_BATCH_SIZE \
     --valid_batchsize $MICRO_BATCH_SIZE \
     --text_column_name title_content
     --train_data_path ${DATA_DIR} \
+    --val_data_path ${VAL_DATA_DIR} \
     --train_split_size 0.999 \
     --max_seq_length 512 \
 "

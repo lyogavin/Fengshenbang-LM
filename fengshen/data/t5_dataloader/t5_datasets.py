@@ -196,6 +196,8 @@ class UnsuperviseT5DataModel(pl.LightningDataModule):
         parser.add_argument('--dataloader_num_workers', default=4, type=int)
         parser.add_argument(
             '--train_data_path', default='wudao_180g_mt5_tokenized', type=str)
+        parser.add_argument(
+            '--val_data_path', default='wudao_180g_mt5_tokenized', type=str)
         parser.add_argument('--train_batchsize', default=2, type=int)
         parser.add_argument('--valid_batchsize', default=2, type=int)
         parser.add_argument('--train_split_size', default=None, type=float)
@@ -211,6 +213,7 @@ class UnsuperviseT5DataModel(pl.LightningDataModule):
 
         if ALWAYS_LOAD_RAW:
             self.train_dataset = UnsuperviseT5Dataset(args.train_data_path, args, load_data_type=0)
+            self.test_dataset = UnsuperviseT5Dataset(args.val_data_path, args, load_data_type=0)
         else:
             if args.train_split_size is not None:
                 from data.fs_datasets import load_dataset
