@@ -120,7 +120,7 @@ class UnsuperviseT5Dataset(Dataset):
             # samples = datasets.load_from_disk(data_path)['train']
         # print(samples)
         cols = list(samples.features.keys())
-        cols.remove('title_content')
+        #cols.remove('title_content')
         tokenized_datasets = samples.map(
             self.tokenize_function,
             batched=True,
