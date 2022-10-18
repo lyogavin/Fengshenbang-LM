@@ -10,7 +10,7 @@
 set -x -e
 
 echo "START TIME: $(date)"
-MICRO_BATCH_SIZE=8
+MICRO_BATCH_SIZE=2
 ROOT_DIR=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/t5/
 if [ ! -d ${ROOT_DIR} ];then
   mkdir -p ${ROOT_DIR}
