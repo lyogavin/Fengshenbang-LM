@@ -80,7 +80,7 @@ export PL_DEEPSPEED_CONFIG_PATH=$config_json
 strategy=deepspeed_stage_1
 
     #--dirpath $ROOT_DIR/ckpt \
-    
+
 TRAINER_ARGS="
     --max_epochs 1 \
     --gpus 1 \
@@ -112,8 +112,10 @@ DATA_ARGS="
 
 MODEL_ARGS="
     --pretrained_model_path IDEA-CCNL/Randeng-T5-784M \
-    --tokenizer_type bert_tokenizer \
+    --tokenizer_type t5_tokenizer \
 "
+#bert_tokenizer
+
 
 SCRIPTS_PATH=/home/ubuntu/Fengshenbang-LM/fengshen/examples/pretrain_t5/pretrain_t5.py
 
