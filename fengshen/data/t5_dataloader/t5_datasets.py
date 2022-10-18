@@ -81,7 +81,6 @@ class UnsuperviseT5Dataset(Dataset):
         self.text_column_name = args.text_column_name
         self.dataset_num_workers = args.dataset_num_workers
         self.max_seq_length = args.max_seq_length
-        self.remove_columns = args.remove_columns
         # whether load tokenieze data
         self.load_data_type = load_data_type
         self.args = args
