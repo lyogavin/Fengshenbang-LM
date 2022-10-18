@@ -540,7 +540,6 @@ class TaskT5DataModel(pl.LightningDataModule):
         parser.add_argument('--tokenizer_type', default='t5_tokenizer', choices=['t5_tokenizer', 'bert_tokenizer'])
         parser.add_argument('--text_column_name', default='text')
         parser.add_argument('--remove_columns', nargs='+', default=[])
-        parser.add_argument('--remove_columns', nargs='+', default=[])
         return parent_args
 
     def __init__(self, args):
