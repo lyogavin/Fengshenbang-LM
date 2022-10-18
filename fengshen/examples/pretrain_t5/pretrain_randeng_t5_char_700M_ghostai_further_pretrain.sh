@@ -112,8 +112,8 @@ TRAINER_ARGS="
 #DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz # for test
 #VAL_DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz # for test
 # real train
-DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_train_1665986569.csv.gz
-VAL_DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_val_1665986569.csv.gz
+DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_train_content_only_1665986569.csv.gz
+VAL_DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_val_content_only_1665986569.csv.gz
 
 DATA_ARGS="
     --train_batchsize $MICRO_BATCH_SIZE \
