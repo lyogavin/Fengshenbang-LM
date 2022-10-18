@@ -105,6 +105,7 @@ DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_titl
 DATA_ARGS="
     --train_batchsize $MICRO_BATCH_SIZE \
     --valid_batchsize $MICRO_BATCH_SIZE \
+    --text_column_name title_content
     --train_data_path ${DATA_DIR} \
     --train_split_size 0.999 \
     --max_seq_length 512 \
