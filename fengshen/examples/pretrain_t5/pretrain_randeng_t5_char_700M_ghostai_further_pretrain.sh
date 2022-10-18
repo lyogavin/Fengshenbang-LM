@@ -47,14 +47,14 @@ cat <<EOT > $config_json
   "optimizer": {
     "type": "Adam",
     "params": {
-      "lr": 1e-4,
+      "lr": 2e-5,
       "weight_decay": 1e-2
     }
   },
   "scheduler": {
     "params": {
-      "warmup_max_lr": 1e-04,
-      "warmup_min_lr": 1e-05,
+      "warmup_max_lr": 2e-05,
+      "warmup_min_lr": 2e-06,
       "total_num_steps": 400000,
       "warmup_num_steps" : 10000
     },
