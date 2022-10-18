@@ -169,7 +169,7 @@ class UnsuperviseT5Dataset(Dataset):
             concatenated_examples = {
                 k: list(chain(*examples[k])) for k in examples.keys()}
         except TypeError as e:
-            print(f"{examples}, {examples.keys()}")
+            print(f"examples: \n{str(examples)[:500]}, \nexamples.keys():\n{str(examples.keys())[:500]}")
             raise e
         total_length = len(concatenated_examples[list(examples.keys())[0]])
         # We drop the small remainder, we could add padding if the model supported it instead of this drop, you can
