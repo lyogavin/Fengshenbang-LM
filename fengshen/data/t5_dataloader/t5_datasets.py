@@ -114,15 +114,12 @@ class UnsuperviseT5Dataset(Dataset):
         # TODO: large data process
         #from data.fs_datasets import load_dataset
 
-        if self.args.overwrite_cache:
-            from datasets import set_caching_enabled
-            set_caching_enabled(False)
-            
         from datasets import load_dataset
+        print(f"loading dataset from: {data_path}")
         samples = load_dataset("csv",
                                download_mode='force_redownload' if self.args.overwrite_cache else 'reuse_dataset_if_exists',
                                data_files={
-                                   'train': '/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_1017_1665986569_sample_test.csv.gz'})['train']
+                                   'train': data_path})['train']
             # samples = datasets.load_from_disk(data_path)['train']
         # print(samples)
         cols = list(samples.features.keys())
