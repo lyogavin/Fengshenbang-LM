@@ -87,7 +87,7 @@ checkpoint_path=$ROOT_DIR/ckpt_$run_ts
 export TORCH_EXTENSIONS_DIR=/home/ubuntu/cloudfs/torch_extendsions
 
 TRAINER_ARGS="
-    --max_epochs 10 \
+    --max_epochs 5 \
     --gpus 4 \
     --num_nodes 1 \
     --strategy deepspeed_stage_2 \
@@ -104,11 +104,11 @@ DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/
 
 
 # for training
-#train_data_file=merged_all_title_content_1017_train_content_only_1665986569.csv.gz
-#val_data_file=merged_all_title_content_1017_val_content_only_1665986569.csv.gz
+train_data_file=merged_all_title_content_1017_train_content_only_1665986569.csv.gz
+val_data_file=merged_all_title_content_1017_val_content_only_1665986569.csv.gz
 # for test training, only sampled 1000 lines
-train_data_file=merged_all_title_content_1017_1665986569_sample_test.csv.gz
-val_data_file=merged_all_title_content_1017_1665986569_sample_test.csv.gz
+#train_data_file=merged_all_title_content_1017_1665986569_sample_test.csv.gz
+#val_data_file=merged_all_title_content_1017_1665986569_sample_test.csv.gz
 
 DATA_ARGS="
     --data_dir $DATA_DIR \
