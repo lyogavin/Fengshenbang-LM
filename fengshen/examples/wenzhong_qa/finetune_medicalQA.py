@@ -121,6 +121,8 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
 def main():
     total_parser = argparse.ArgumentParser("Summary Task")
     total_parser.add_argument(
+        '--run_ts', default=None, type=str)
+    total_parser.add_argument(
         '--do_eval_only', action='store_true', default=False)
     total_parser.add_argument(
         '--pretrained_model_path', default=None, type=str)
@@ -135,6 +137,8 @@ def main():
     total_parser = GPT2FinetuneMedicalQA.add_model_specific_args(total_parser)
     # * Args for base model
     args = total_parser.parse_args()
+
+    print(f"args:{args}")
 
     data_model = GPT2QADataModel(args)
     if not args.do_eval_only:
@@ -154,8 +158,9 @@ def main():
         #     for line in result:
         #         w.writelines(line)
 
-        model.model.save_pretrained(
-            '/cognitive_comp/wuziwei/pretrained_model_hf')
+        model.model.save_pretrained(os.path.join(args.default_root_dir, f"gpt2_all_merged_gen_content_finetune_{args.run_ts}"))
+           # '/cognitive_comp/wuziwei/pretrained_model_hf')
+        print(f'model saved: {os.path.join(args.default_root_dir, f"gpt2_all_merged_gen_content_finetune_{args.run_ts}")}')
     else:
         print('save to hf.....')
         trainer = Trainer.from_argparse_args(args)

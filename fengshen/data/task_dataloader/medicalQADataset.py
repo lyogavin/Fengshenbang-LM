@@ -4,6 +4,7 @@ import pytorch_lightning as pl
 from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
 from transformers import AutoTokenizer
+import pandas as pd
 
 
 class GPT2QADataset(Dataset):
@@ -28,9 +29,15 @@ class GPT2QADataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, index):
-        return self.encode(self.data[index])
+        return self.encode(self.data.iloc[index])
 
     def load_data(self, data_path):
+        df = pd.read_csv(data_path)
+        return df
+
+
+
+    def load_data_file(self, data_path):
         # 有进度条展示
         if self.data_size <= 5:
             with open(data_path, "rt", encoding='utf8') as f:
@@ -62,7 +69,7 @@ class GPT2QADataset(Dataset):
         """
         将数据转换成模型训练的输入
         """
-        inputs_dict = self.tokenizer.encode_plus(item['Question']+item['answer'],
+        inputs_dict = self.tokenizer.encode_plus(item['title']+item['content'],
                                                  max_length=self.max_seq_length, padding='max_length',
                                                  truncation=True, return_tensors='pt')
         target = inputs_dict['input_ids']
@@ -72,8 +79,8 @@ class GPT2QADataset(Dataset):
             "input_ids": inputs_dict['input_ids'].squeeze(),
             "attention_mask": inputs_dict['attention_mask'].squeeze(),
             "labels": labels.squeeze(),
-            "question": item['Question'],
-            "answer": item['answer']
+            "question": item['title'],
+            "answer": item['content']
         }
 
 
