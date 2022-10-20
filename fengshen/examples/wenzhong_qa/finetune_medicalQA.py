@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append('../../data')
+sys.path.append('../..')
 print(sys.path)
 
 from transformers import GPT2LMHeadModel
