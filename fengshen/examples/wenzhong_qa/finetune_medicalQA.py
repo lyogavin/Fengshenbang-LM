@@ -1,6 +1,7 @@
 import sys
 
 sys.path.append('../../data')
+print(sys.path)
 
 from transformers import GPT2LMHeadModel
 from data.task_dataloader.medicalQADataset import GPT2QADataModel
