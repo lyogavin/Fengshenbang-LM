@@ -129,7 +129,7 @@ MODEL_ARGS="
     --warmup 0.01 \
 "
 
-SCRIPTS_PATH=/home/ubuntu/Fengshenbang-LM/fengshen/examples/GPT_pretrain_finetune/finetune_medicalQA.py
+SCRIPTS_PATH=/home/ubuntu/Fengshenbang-LM/fengshen/examples/wenzhong_qa/finetune_medicalQA.py
 
 export CMD=" \
     $SCRIPTS_PATH \
