@@ -1,5 +1,5 @@
 from transformers import GPT2LMHeadModel
-from data.task_dataloader.medicalQADataset import GPT2QADataModel
+from fengshen.data.task_dataloader.medicalQADataset import GPT2QADataModel
 from transformers.optimization import get_linear_schedule_with_warmup
 from pytorch_lightning import Trainer, loggers
 from pytorch_lightning.callbacks import ModelCheckpoint
