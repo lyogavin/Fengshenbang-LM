@@ -104,8 +104,8 @@ DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/
 
 
 # for training
-train_data_file=merged_all_title_content_add_zhihu_sougouwx_exp_1028_train_1667015642.csv.gz
-val_data_file=merged_all_title_content_add_zhihu_sougouwx_exp_1028_val_1667015642.csv.gz
+train_data_file=merged_all_title_content_add_zhihu_sougouwx_exp_1028_train_1667018672.csv.gz
+val_data_file=merged_all_title_content_add_zhihu_sougouwx_exp_1028_val_1667018672.csv.gz
 # for test training, only sampled 1000 lines
 #train_data_file=merged_all_title_content_1017_1665986569_sample_test.csv.gz
 #val_data_file=merged_all_title_content_1017_1665986569_sample_test.csv.gz
