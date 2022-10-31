@@ -69,7 +69,7 @@ class GPT2QADataset(Dataset):
         """
         将数据转换成模型训练的输入
         """
-        inputs_dict = self.tokenizer.encode_plus(item['title']+item['content'],
+        inputs_dict = self.tokenizer.encode_plus(item['title']+' ' + item['content'],
                                                  max_length=self.max_seq_length, padding='max_length',
                                                  truncation=True, return_tensors='pt')
         target = inputs_dict['input_ids']
