@@ -18,6 +18,59 @@ sys.path.insert(0, '/cognitive_comp/wuziwei/codes/fengshen/fengshen')
 # sys.path.append('../')
 # os.environ["CUDA_VISIBLE_DEVICES"] = '4,5,6,7'
 
+# ad hoc
+
+def generate_agent_paraphrase(model, tokenizer, encoded_input_ids, return_count=5, verbose=False,
+                              diversity_enhanced=False, diversity_penalty=0.1,
+                              bad_words_ids=None,
+                              typical_p=0.95):
+
+
+    model_generate_params = {
+        #'max_length': MAX_TARGET_LEN,
+        # 'min_length':int(MAX_TARGET_LEN/3*2),
+        'num_beams': 4,
+        'num_return_sequences': 2,
+        'temperature': 1.1,
+        'output_scores': True,
+        'repetition_penalty': 1.,  # https://arxiv.org/pdf/1909.05858.pdf,
+        'return_dict_in_generate': True,
+        'no_repeat_ngram_size': 4,
+        'top_p': 0.85,
+        # 'top_k':5,
+        'do_sample': True,
+        'early_stopping': True
+    }
+
+    if diversity_enhanced:
+        model_generate_params = {**model_generate_params,
+                                 **{
+                                     'num_beam_groups': return_count,
+                                     'diversity_penalty': diversity_penalty,
+                                     'do_sample': False
+                                 }}
+    elif typical_p is not None:
+        model_generate_params['typical_p'] = typical_p
+
+    if bad_words_ids is not None:
+        model_generate_params['bad_words_ids'] = bad_words_ids
+
+    # get prompt score:
+    outputs = model(input_ids=encoded_input_ids, labels=encoded_input_ids)
+
+    prompt_score = outputs.loss.cpu().detach()
+    torch.cuda.empty_cache()
+
+    text_outputs = model.generate(input_ids=encoded_input_ids,
+                                  **model_generate_params
+                                  )  # ,attention_mask=attention_mask)
+    decoded_text_outputs = tokenizer.batch_decode(text_outputs.sequences, skip_special_tokens=True)
+
+    list_with_scores = list(zip([s.item() for s in text_outputs.sequences_scores],
+                                [x.replace(" ", " ") for x in decoded_text_outputs]))
+    return list_with_scores
+
+
 
 class GPT2FinetuneMedicalQAModelCheckpoint:
     @staticmethod
@@ -57,10 +110,11 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         parser.add_argument('--warmup', default=0.01, type=float)
         return parent_args
 
-    def __init__(self, args, num_data):
+    def __init__(self, args, num_data, tokenizer=None):
         super().__init__()
         self.args = args
         self.num_data = num_data
+        self.tokenizer = tokenizer
         print('num_data:', num_data)
         self.model = GPT2LMHeadModel.from_pretrained(
             args.pretrained_model_path)
@@ -95,6 +149,8 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         # acc = self.comput_metrix(output.logits, batch['labels'])
         self.log('val_loss', output.loss)
         # self.log('val_acc', acc)
+        prediction = generate_agent_paraphrase(self.model, self.tokenizer, batch['input_ids'])
+        self.log('validation_samples', f"labels: {batch['answer']}\npredictions: {prediction}")
 
     def configure_optimizers(self):
         no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
@@ -147,7 +203,10 @@ def main():
 
     data_model = GPT2QADataModel(args)
     if not args.do_eval_only:
-        model = GPT2FinetuneMedicalQA(args, len(data_model.train_dataloader()))
+        model = GPT2FinetuneMedicalQA(args,
+                                      len(data_model.train_dataloader()),
+                                      tokenizer=data_model.tokenizer
+                                      )
         checkpoint_callback = GPT2FinetuneMedicalQAModelCheckpoint(
             args).callbacks
         logger = loggers.TensorBoardLogger(save_dir=os.path.join(
