@@ -27,7 +27,7 @@ def generate_agent_paraphrase(model, tokenizer, encoded_input_ids, return_count=
 
 
     model_generate_params = {
-        #'max_length': MAX_TARGET_LEN,
+        'max_length': 800,
         # 'min_length':int(MAX_TARGET_LEN/3*2),
         'num_beams': 4,
         'num_return_sequences': 2,
@@ -149,8 +149,8 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         # acc = self.comput_metrix(output.logits, batch['labels'])
         self.log('val_loss', output.loss)
         # self.log('val_acc', acc)
-        print(f"input ids shape: {batch['input_ids'].unsqueeze(0)}")
-        prediction = generate_agent_paraphrase(self.model, self.tokenizer, batch['input_ids'].unsqueeze(0))
+        print(f"input ids shape: {batch['input_ids']}")
+        prediction = generate_agent_paraphrase(self.model, self.tokenizer, batch['input_ids'])
         self.log('validation_samples', f"labels: {batch['answer']}\npredictions: {prediction}")
 
     def configure_optimizers(self):
