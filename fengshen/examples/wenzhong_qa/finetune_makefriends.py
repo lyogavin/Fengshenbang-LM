@@ -163,6 +163,8 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
             prediction = generate_agent_paraphrase(self.model, self.tokenizer, batch['prompt_input_ids'])
             print(f"validation_samples:\nlabels: {batch['prompted_content']}\npredictions: {prediction}")
 
+            torch.cuda.empty_cache()
+
     def configure_optimizers(self):
         no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
         paras = list(

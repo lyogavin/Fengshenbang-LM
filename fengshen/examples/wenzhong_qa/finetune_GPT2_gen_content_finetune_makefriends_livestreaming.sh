@@ -87,13 +87,13 @@ checkpoint_path=$ROOT_DIR/ckpt_$run_ts
 export TORCH_EXTENSIONS_DIR=/home/ubuntu/cloudfs/torch_extendsions
 
 TRAINER_ARGS="
-    --max_epochs 10 \
+    --max_epochs 50 \
     --gpus 4 \
     --num_nodes 1 \
     --strategy deepspeed_stage_2 \
     --default_root_dir $ROOT_DIR \
     --dirpath $checkpoint_path \
-    --save_top_k 3 \
+    --save_top_k 2 \
     --monitor train_loss \
     --mode min \
     --save_last \
