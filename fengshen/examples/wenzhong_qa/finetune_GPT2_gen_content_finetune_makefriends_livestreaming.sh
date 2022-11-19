@@ -17,7 +17,7 @@ echo "RUN TS: $(run_ts)"
 
 echo "START TIME: $(date)"
 MICRO_BATCH_SIZE=1
-ROOT_DIR=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2
+ROOT_DIR=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/make_friends_live_streaming_guid
 
 if [ ! -d ${ROOT_DIR} ];then
   mkdir -p ${ROOT_DIR}
@@ -104,8 +104,8 @@ DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/
 
 
 # for training
-train_data_file=merged_all_title_content_add_zhihu_sougouwx_exp_1028_train_1667018672.csv.gz
-val_data_file=merged_all_title_content_add_zhihu_sougouwx_exp_1028_val_1667018672.csv.gz
+train_data_file=/home/ubuntu/cloudfs/ghost_data/make_friends_live_streaming_guid/cleanedup_makes_friends_streaming_guid_prompted_train_1668805726.csv
+val_data_file=/home/ubuntu/cloudfs/ghost_data/make_friends_live_streaming_guid/cleanedup_makes_friends_streaming_guid_prompted_val_1668805726.csv
 # for test training, only sampled 1000 lines
 #train_data_file=merged_all_title_content_1017_1665986569_sample_test.csv.gz
 #val_data_file=merged_all_title_content_1017_1665986569_sample_test.csv.gz
@@ -131,7 +131,7 @@ MODEL_ARGS="
     --run_ts ${run_ts} \
 "
 
-SCRIPTS_PATH=/home/ubuntu/Fengshenbang-LM/fengshen/examples/wenzhong_qa/finetune_medicalQA.py
+SCRIPTS_PATH=/home/ubuntu/Fengshenbang-LM/fengshen/examples/wenzhong_qa/finetune_makefriends.py
 
 export CMD=" \
     $SCRIPTS_PATH \
