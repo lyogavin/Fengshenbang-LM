@@ -149,6 +149,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         # acc = self.comput_metrix(output.logits, batch['labels'])
         self.log('val_loss', output.loss)
         # self.log('val_acc', acc)
+        print(f"input ids shape: {batch['input_ids'].unsqueeze(0)}")
         prediction = generate_agent_paraphrase(self.model, self.tokenizer, batch['input_ids'].unsqueeze(0))
         self.log('validation_samples', f"labels: {batch['answer']}\npredictions: {prediction}")
 
