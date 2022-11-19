@@ -99,6 +99,8 @@ class GPT2FinetuneMedicalQAModelCheckpoint:
                                          filename=args.filename,
                                          save_last=args.save_last)
 
+    def on_epoch_end(self, args, state, control, **kwargs):
+        super().on_epoch_end(*args, **kwargs)
 
 class GPT2FinetuneMedicalQA(pl.LightningModule):
 
@@ -150,9 +152,14 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         self.log('val_loss', output.loss)
         # self.log('val_acc', acc)
         #print(f"input ids : {batch['input_ids']}")
-        print(f"input text: {batch['prompt']}")
-        prediction = generate_agent_paraphrase(self.model, self.tokenizer, batch['prompt_input_ids'])
-        print(f"validation_samples:\nlabels: {batch['prompted_content']}\npredictions: {prediction}")
+
+        return batch
+
+    def validation_epoch_end(self, training_step_outputs):
+        for batch in training_step_outputs:
+            print(f"input text: {batch['prompt']}")
+            prediction = generate_agent_paraphrase(self.model, self.tokenizer, batch['prompt_input_ids'])
+            print(f"validation_samples:\nlabels: {batch['prompted_content']}\npredictions: {prediction}")
 
     def configure_optimizers(self):
         no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
@@ -215,7 +222,7 @@ def main():
             args.default_root_dir, 'log/'), name='MedicalQA-GPT2')
         trainer = Trainer.from_argparse_args(args,
                                              logger=logger,
-                                             evaluation_strategy='epoch',
+                                             #evaluation_strategy='epoch',
                                              callbacks=[checkpoint_callback]
                                              )
         trainer.fit(model, data_model)
