@@ -158,7 +158,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
 
     def validation_epoch_end(self, training_step_outputs):
         random.shuffle(training_step_outputs)
-        for bi, batch in enumerate(training_step_outputs[:10]):
+        for bi, batch in enumerate(training_step_outputs[:2]):
             print(f"--{bi}/{10}--- input text: {batch['prompt']}")
             prediction = generate_agent_paraphrase(self.model, self.tokenizer, batch['prompt_input_ids'])
             print(f"validation_samples:\nlabels: {batch['prompted_content']}\npredictions: {prediction}")
