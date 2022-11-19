@@ -87,7 +87,7 @@ checkpoint_path=$ROOT_DIR/ckpt_$run_ts
 export TORCH_EXTENSIONS_DIR=/home/ubuntu/cloudfs/torch_extendsions
 
 TRAINER_ARGS="
-    --max_epochs 3 \
+    --max_epochs 10 \
     --gpus 4 \
     --num_nodes 1 \
     --strategy deepspeed_stage_2 \
@@ -97,6 +97,7 @@ TRAINER_ARGS="
     --monitor train_loss \
     --mode min \
     --save_last \
+    --check_val_every_n_epoch 1 \
 "
 #DATA_DIR=/cognitive_comp/wuziwei/task-data/medical_qa
 
