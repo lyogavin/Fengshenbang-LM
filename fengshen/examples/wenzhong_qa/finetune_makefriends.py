@@ -152,7 +152,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         #print(f"input ids : {batch['input_ids']}")
         print(f"input text: {batch['prompt']}")
         prediction = generate_agent_paraphrase(self.model, self.tokenizer, batch['prompt_input_ids'])
-        self.log('validation_samples', f"labels: {batch['prompted_content']}\npredictions: {prediction}")
+        print(f"validation_samples:\nlabels: {batch['prompted_content']}\npredictions: {prediction}")
 
     def configure_optimizers(self):
         no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
