@@ -1,0 +1,353 @@
+    1  2022-11-05 07:05:54  
+    2  2022-10-20 10:47:33 wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.12.0-Linux-x86_64.sh
+    3  2022-10-20 10:47:42 bash ./Miniconda3-py38_4.12.0-Linux-x86_64.sh 
+    4  2022-10-20 10:48:14 conda create -n ghostaienv python=3.8
+    5  2022-10-20 10:48:22 source ~/.bashrc 
+    6  2022-10-20 10:48:24 conda create -n ghostaienv python=3.8
+    7  2022-10-20 10:48:44 conda activate ghostaienv
+    8  2022-10-20 10:48:46 nvidia-smi
+    9  2022-10-20 10:48:58 ssh-keygen -t ed25519 -C “lyo.gavin@gmail.com”
+   10  2022-10-20 10:49:08 cat ~/.ssh/id_ed25519.pub 
+   11  2022-10-20 10:50:54 git clone git@github.com:lyogavin/ghostai_training.git
+   12  2022-10-20 10:52:42 sudo mount -t nfs -o vers=4.0,noresvport 172.16.16.5:/ /home/ubuntu/cloudfs
+   13  2022-10-20 10:52:48 mkdir ~/cloudfs
+   14  2022-10-20 10:52:49 sudo mount -t nfs -o vers=4.0,noresvport 172.16.16.5:/ /home/ubuntu/cloudfs
+   15  2022-10-20 10:53:26 sudo mount -t nfs -o vers=4.0,noresvport 172.21.16.10:/ /home/ubuntu/cloudfs
+   16  2022-10-20 10:53:30 ls ~/cloudfs/
+   17  2022-10-20 10:54:45 conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
+   18  2022-10-20 11:05:38 pip install triton==1.0.0
+   19  2022-10-20 11:05:52 sudo apt install libaio-dev 
+   20  2022-10-20 11:06:20 DS_BUILD_OPS=1 pip install deepspeed
+   21  2022-10-20 11:20:32 ds_report
+   22  2022-10-20 11:20:43 python
+   23  2022-10-20 11:21:27 pip install pytorch_lightning transformers  jieba  sentencepiece  datasets
+   24  2022-10-20 11:38:42 python
+   25  2022-10-20 11:48:17 ls
+   26  2022-10-20 11:48:29 git clone git@github.com:lyogavin/Fengshenbang-LM.git
+   27  2022-10-20 11:48:40 cd Fengshenbang-LM/
+   28  2022-10-20 11:48:41 ls
+   29  2022-10-20 11:48:46 cd fengshen/
+   30  2022-10-20 11:48:46 ls
+   31  2022-10-20 11:48:52 cd examples/
+   32  2022-10-20 11:48:53 ls
+   33  2022-10-20 11:49:02 cd wenzhong_qa/
+   34  2022-10-20 11:49:02 ls
+   35  2022-10-20 11:49:11 ls -l
+   36  2022-10-20 11:49:50 ls /home/ubuntu/cloudfs/ghost_data/merge_all_title_content/
+   37  2022-10-20 11:49:59 bash ./finetune_GPT2_gen_content_merged_all_1019.sh
+   38  2022-10-20 11:50:16 ls
+   39  2022-10-20 11:50:46 git pull
+   40  2022-10-20 11:50:58 bash ./finetune_GPT2_gen_content_merged_all_1019.sh
+   41  2022-10-20 11:52:38 git pull
+   42  2022-10-20 11:52:44 bash ./finetune_GPT2_gen_content_merged_all_1019.sh
+   43  2022-10-20 11:52:52 cd ../../
+   44  2022-10-20 11:52:54 cd ..
+   45  2022-10-20 11:53:09 bash ./fengshen/examples/wenzhong_qa/finetune_GPT2_gen_content_merged_all_1019.sh 
+   46  2022-10-20 11:53:15 cd -
+   47  2022-10-20 11:53:19 cd examples/
+   48  2022-10-20 11:53:19 ls
+   49  2022-10-20 11:53:21 cd wenzhong_qa/
+   50  2022-10-20 11:53:21 ls
+   51  2022-10-20 11:54:20 git pull
+   52  2022-10-20 11:54:33 bash ./fengshen/examples/wenzhong_qa/finetune_GPT2_gen_content_merged_all_1019.sh 
+   53  2022-10-20 11:54:44 bash ./finetune_GPT2_gen_content_merged_all_1019.sh
+   54  2022-10-20 11:55:04 git pull
+   55  2022-10-20 11:55:10 bash ./finetune_GPT2_gen_content_merged_all_1019.sh
+   56  2022-10-20 11:56:16 git pull
+   57  2022-10-20 11:56:22 bash ./finetune_GPT2_gen_content_merged_all_1019.sh
+   58  2022-10-20 11:56:54 git pull
+   59  2022-10-20 11:57:00 bash ./finetune_GPT2_gen_content_merged_all_1019.sh
+   60  2022-10-20 12:13:38 nvidia-smi -l 1
+   61  2022-10-20 12:28:05 kill -9 85373 87629 87638
+   62  2022-10-20 12:28:16 ps aux | grep pytho
+   63  2022-10-20 12:28:20 git pull
+   64  2022-10-20 12:28:12 nvidia-smi -l 1
+   65  2022-10-20 12:41:48 ls
+   66  2022-10-20 12:42:19 cd cloudfs/saved_models/deep_speed_experiments/gpt2/
+   67  2022-10-20 12:42:20 ls
+   68  2022-10-20 12:42:24 cd ckpt_1666240109/
+   69  2022-10-20 12:42:24 ls
+   70  2022-10-20 12:42:31 cd last.ckpt/
+   71  2022-10-20 12:42:32 ls
+   72  2022-10-20 12:42:40 cd checkpoint/
+   73  2022-10-20 12:42:41 ls
+   74  2022-10-20 12:28:29 bash ./finetune_GPT2_gen_content_merged_all_1019.sh
+   75  2022-10-20 12:54:17 git pull
+   76  2022-10-20 12:54:30 nohup bash ./finetune_GPT2_gen_content_merged_all_1019.sh &
+   77  2022-10-20 12:54:37 tail -f ./nohup.out 
+   78  2022-10-20 13:02:13 ps aux | grep python
+   79  2022-10-20 13:02:18 git pull
+   80  2022-10-20 13:02:26 nohup bash ./finetune_GPT2_gen_content_merged_all_1019.sh &
+   81  2022-10-20 13:02:29 tail -f ./nohup.out 
+   82  2022-10-20 12:53:30 nvidia-smi -l 1
+   83  2022-10-20 21:54:21 cd Fengshenbang-LM/fengshen/examples/
+   84  2022-10-20 21:54:22 ls
+   85  2022-10-20 21:54:32 cd wenzhong_qa/
+   86  2022-10-20 21:54:33 ls
+   87  2022-10-20 21:54:38 tail -f ./nohup.out 
+   88  2022-10-20 21:55:25 nvidia-smi -l 1
+   89  2022-10-21 03:57:48 cd ~/Fengshenbang-LM/fengshen/examples/wenzhong_qa
+   90  2022-10-21 03:58:05 nvidia-smi -l 1
+   91  2022-10-21 03:57:51 tail -f ./nohup.out 
+   92  2022-10-22 21:22:46 cd ~/Fengshenbang-LM/fengshen/examples/wenzhong_qa
+   93  2022-10-23 06:35:20 nvidia-smi -l 1
+   94  2022-10-23 07:30:22 cd cloudfs/ghost_data/
+   95  2022-10-23 07:30:23 ls
+   96  2022-10-23 07:30:30 cd ..
+   97  2022-10-23 07:30:30 ls
+   98  2022-10-23 07:30:34 cd saved_models/deep_speed_experiments/
+   99  2022-10-23 07:30:34 ls
+  100  2022-10-23 07:30:36 cd gpt2/
+  101  2022-10-23 07:30:37 ls
+  102  2022-10-23 07:30:41 ls -lth
+  103  2022-10-23 07:30:42 date
+  104  2022-10-23 07:30:56 cd ckpt_1666242146/
+  105  2022-10-23 07:30:57 ls
+  106  2022-10-23 07:30:59 ls -lht
+  107  2022-10-23 07:31:04 cd last.ckpt/
+  108  2022-10-23 07:31:05 ls
+  109  2022-10-23 07:31:08 ls -lht
+  110  2022-10-23 07:31:15 cd checkpoint/
+  111  2022-10-23 07:31:16 ls
+  112  2022-10-23 07:31:20 ls -lh
+  113  2022-10-23 07:31:50 cd ~/Fengshenbang-LM/fengshen/examples/wenzhong_qa
+  114  2022-10-23 07:31:53 less ./nohup.out 
+  115  2022-10-23 07:32:51 grep 'run_ts' ./nohup.out 
+  116  2022-10-22 21:22:49 tail -f ./nohup.out 
+  117  2022-10-25 21:22:08 cd ~/Fengshenbang-LM/fengshen/examples/wenzhong_qa
+  118  2022-10-25 21:22:11 less ./nohup.out 
+  119  2022-10-26 03:38:25 cd cloudfs/saved_models/deep_speed_experiments/
+  120  2022-10-26 03:38:25 ls
+  121  2022-10-26 03:38:28 cd gpt2/
+  122  2022-10-26 03:38:29 ls
+  123  2022-10-26 03:38:38 ls -lht
+  124  2022-10-26 03:38:45 cd ckpt_166624
+  125  2022-10-26 03:38:51 cd ckpt_1666240109
+  126  2022-10-26 03:38:52 ls
+  127  2022-10-26 03:38:59 ls -lht
+  128  2022-10-26 03:39:05 cd  last.ckpt
+  129  2022-10-26 03:39:05 ls
+  130  2022-10-26 03:39:13 ls ./checkpoint/
+  131  2022-10-26 03:39:27 ./zero_to_fp32.py --help
+  132  2022-10-26 03:39:40 conda activate ghostaienv
+  133  2022-10-26 03:39:43 ./zero_to_fp32.py --help
+  134  2022-10-26 03:41:50 ls
+  135  2022-10-26 03:41:55 mkdir fp32
+  136  2022-10-26 03:42:22 ./zero_to_fp32.py ./checkpoint ./fp32/pytorch_model.bin
+  137  2022-10-26 03:42:37 ls
+  138  2022-10-26 03:43:06 ./zero_to_fp32.py ../ckpt_1666240109 ./fp32/pytorch_model.bin
+  139  2022-10-26 03:43:15 ls
+  140  2022-10-26 03:43:22 cd ..
+  141  2022-10-26 03:43:25 ls
+  142  2022-10-26 03:43:35 ./last.ckpt/zero_to_fp32.py pwd
+  143  2022-10-26 03:43:38 pwd
+  144  2022-10-26 03:44:14 ./last.ckpt/zero_to_fp32.py /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666240109 /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666240109/pytorch_model.bin
+  145  2022-10-26 03:44:24 ls /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666240109/latest
+  146  2022-10-26 03:44:33 ls /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666240109/last.ckpt/
+  147  2022-10-26 03:44:43 cd last.ckpt/
+  148  2022-10-26 03:45:15 ls /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666240109/last.ckpt/ /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666240109/last.ckpt/fp32/pytorch_model.bin
+  149  2022-10-26 03:45:26 ls /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666240109/last.ckpt/ /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666240109/last.ckpt/fp32/
+  150  2022-10-26 03:45:44 ./zero_to_fp32.py  /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666240109/last.ckpt/ /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666240109/last.ckpt/fp32/pytorch_model.bin
+  151  2022-10-26 04:03:07 cd ..
+  152  2022-10-26 04:03:10 ls -lht
+  153  2022-10-26 04:03:15 cd ckpt_1666242146
+  154  2022-10-26 04:03:20 cd last.ckpt/
+  155  2022-10-26 04:03:56 #./zero_to_fp32.py  /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/last.ckpt/ /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/last.ckpt/fp32/
+  156  2022-10-26 04:04:01 mkdir fp32
+  157  2022-10-26 04:04:12 ls ../../ckpt_1666240109/last.ckpt/fp32/
+  158  2022-10-26 04:04:17 ls -l ../../ckpt_1666240109/last.ckpt/fp32/
+  159  2022-10-26 04:04:36 ls ../
+  160  2022-10-26 04:04:39 ls ../../
+  161  2022-10-26 04:04:53 cat ../../training_config.json 
+  162  2022-10-26 04:05:12 ls
+  163  2022-10-26 04:05:24 ./zero_to_fp32.py  /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/last.ckpt/ /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/last.ckpt/fp32/
+  164  2022-10-26 04:11:59 ./zero_to_fp32.py  /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/last.ckpt/ /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/last.ckpt/fp32/pytorch_model.bin
+  165  2022-10-26 05:41:48 ls
+  166  2022-10-26 05:41:53 ls ./checkpoint/
+  167  2022-10-26 05:41:57 cd ..
+  168  2022-10-26 05:41:57 ls
+  169  2022-10-26 05:42:09 cd 'model-epoch=01-train_loss=0.8687.ckpt'
+  170  2022-10-26 05:42:10 ls
+  171  2022-10-26 05:42:14 cd checkpoint/
+  172  2022-10-26 05:42:14 ls
+  173  2022-10-26 05:42:19 cd ..
+  174  2022-10-26 05:42:21 ls -lht
+  175  2022-10-26 05:42:31 cd ..
+  176  2022-10-26 05:42:31 ls
+  177  2022-10-26 05:44:08 less ~/Fengshenbang-LM/fengshen/examples/wenzhong_qa/nohup.out 
+  178  2022-10-26 05:44:43 grep 'run_ts' ~/Fengshenbang-LM/fengshen/examples/wenzhong_qa/nohup.out 
+  179  2022-10-26 05:45:00 ls
+  180  2022-10-26 05:45:05 cd ckpt_1666242146
+  181  2022-10-26 05:45:27 ls
+  182  2022-10-26 05:45:36 ls 'model-epoch=01-train_loss=0.8687.ckpt'
+  183  2022-10-26 05:45:40 ls model-epoch\=01-train_loss\=0.8687.ckpt/checkpoint/
+  184  2022-10-26 05:45:48 ls -l model-epoch\=01-train_loss\=0.8687.ckpt/checkpoint/
+  185  2022-10-26 05:45:57 ls -l last.ckpt/
+  186  2022-10-26 05:46:14 ls -l last.ckpt/checkpoint/
+  187  2022-10-26 05:54:41 ls
+  188  2022-10-26 05:54:54 ls 
+  189  2022-10-26 05:55:01 ls ./model-epoch=00-train_loss=1.3984.ckpt
+  190  2022-10-26 05:55:07 ls ../
+  191  2022-10-26 05:55:11 ls ../log/
+  192  2022-10-26 05:55:14 ls ../log/MedicalQA-GPT2/
+  193  2022-10-26 05:55:18 ls ../log/MedicalQA-GPT2/version_1
+  194  2022-10-26 05:55:25 ls -l ../log/MedicalQA-GPT2/version_1
+  195  2022-10-26 06:03:05 ls
+  196  2022-10-26 06:03:09 ls ./last.ckpt/
+  197  2022-10-26 06:03:31 ls ./last.ckpt/checkpoint/
+  198  2022-10-26 06:04:18 scp ./last.ckpt/checkpoint/mp_rank_00_model_states.pt ubuntu@aiwriter002:~/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/fp32/
+  199  2022-10-26 06:04:30 scp ./last.ckpt/checkpoint/mp_rank_00_model_states.pt ubuntu@aiwriter002.ghostai.xyz:~/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/fp32/
+  200  2022-10-26 06:04:48 cat ~/.ssh/id_ed25519.pub 
+  201  2022-10-26 06:05:18 scp ./last.ckpt/checkpoint/mp_rank_00_model_states.pt ubuntu@aiwriter002.ghostai.xyz:~/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/fp32/
+  202  2022-10-26 06:05:45 scp ./last.ckpt/checkpoint/mp_rank_00_model_states.pt ubuntu@aiwriter002.ghostai.xyz:/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/fp32/
+  203  2022-10-26 06:06:07 scp ./last.ckpt/checkpoint/mp_rank_00_model_states.pt  ubuntu@aiwriter002.ghostai.xyz:/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/fp32/
+  204  2022-10-26 06:06:53 scp ./last.ckpt/checkpoint/mp_rank_00_model_states.pt  ubuntu@aiwriter002.ghostai.xyz:/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/last.ckpt/fp32/
+  205  2022-10-26 07:42:25 cd 'model-epoch=01-train_loss=0.8687.ckpt'
+  206  2022-10-26 07:42:26 ls
+  207  2022-10-26 07:42:34 cd checkpoint/
+  208  2022-10-26 07:42:36 ls
+  209  2022-10-26 07:43:56 scp ./mp_rank_00_model_states.pt ubuntu@aiwriter002.ghostai.xyz:/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/model-epoch=01-train_loss=0.8687.ckpt/checkpoint/
+  210  2022-10-26 07:54:12 cd ../../
+  211  2022-10-26 07:54:12 ls
+  212  2022-10-26 07:54:19 cd 'model-epoch=00-train_loss=1.3984.ckpt'
+  213  2022-10-26 07:54:20 ls
+  214  2022-10-26 07:54:25 cd checkpoint/
+  215  2022-10-26 07:54:26 ls
+  216  2022-10-26 07:55:15 scp ./mp_rank_00_model_states.pt ubuntu@aiwriter002.ghostai.xyz:/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/model-epoch=00-train_loss=1.3984.ckpt/checkpoint/
+  217  2022-10-25 21:22:17 tail -f ./nohup.out 
+  218  2022-10-27 05:05:59 cd ~/Fengshenbang-LM/fengshen/examples/wenzhong_qa
+  219  2022-10-27 05:06:04 tail -f ./nohup.out 
+  220  2022-10-27 21:22:56 cd ~/Fengshenbang-LM/fengshen/examples/wenzhong_qa
+  221  2022-10-27 21:22:58 tail -f ./nohup.out 
+  222  2022-10-29 04:39:41 cd ../../
+  223  2022-10-29 04:39:42 ls
+  224  2022-10-29 04:39:49 cd 'model-epoch=02-train_loss=0.7017.ckpt'
+  225  2022-10-29 04:39:51 ls
+  226  2022-10-29 04:39:55 cd checkpoint/
+  227  2022-10-29 04:39:55 ls
+  228  2022-10-29 04:40:06 pwd
+  229  2022-10-29 04:40:42 scp ./mp_rank_00_model_states.pt ubuntu@aiwriter002.ghostai.xyz:/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/ckpt_1666242146/model-epoch=02-train_loss=0.7017.ckpt/checkpoint/
+  230  2022-10-29 11:57:04 cd
+  231  2022-10-29 11:57:10 ps aux | grep python
+  232  2022-10-29 11:57:22 ps aux | grep nohup
+  233  2022-10-29 11:57:25 ps aux | grep train
+  234  2022-10-29 11:57:39 ps aux | grep finetune_medicalQA.py
+  235  2022-10-29 11:58:41 ps aux | grep finetune_medicalQA.py |  awk '{print $2}'| xargs kill -9
+  236  2022-10-29 11:58:49 ps aux | grep python
+  237  2022-10-29 11:58:53 nvidia-smi
+  238  2022-10-29 11:58:56 top
+  239  2022-10-29 12:46:27 cd Fengshenbang-LM/
+  240  2022-10-29 12:46:28 git
+  241  2022-10-29 12:46:31 git pull
+  242  2022-10-29 12:48:00 cd fengshen/examples/wenzhong_qa
+  243  2022-10-29 12:48:01 ls
+  244  2022-10-29 12:48:14 mv ./nohup.out ./nohup.out.1016
+  245  2022-10-29 12:48:30 ls
+  246  2022-10-29 12:49:04 ls /home/ubuntu/cloudfs/ghost_data/merge_all_title_content/
+  247  2022-10-29 13:00:28 nohup bash ./finetune_GPT2_gen_content_merged_all_add_zhihou_sougouwx_exp_1028.sh &
+  248  2022-10-29 13:00:31 tail -f ./nohup.out 
+  249  2022-10-29 13:03:16 ls /home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_add_zhihu_sougouwx_exp_1028_train_1667015642.csv.gz
+  250  2022-10-29 13:04:08 ls /home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_add_zhihu_sougouwx_exp_1028_val_1667018672.csv.gz
+  251  2022-10-29 13:05:28 git pull
+  252  2022-10-29 13:05:37 nohup bash ./finetune_GPT2_gen_content_merged_all_add_zhihou_sougouwx_exp_1028.sh &
+  253  2022-10-29 12:58:20 nvidia-smi -l 1
+  254  2022-10-29 13:05:40 tail -f ./nohup.out 
+  255  2022-10-29 21:12:48 conda activate ghostaienv
+  256  2022-10-29 21:12:59 cd fengshen/examples/wenzhong_qa
+  257  2022-10-29 21:13:01 tail -f ./nohup.out 
+  258  2022-10-29 21:13:07 cd Fengshenbang-LM/
+  259  2022-10-29 21:13:10 cd fengshen/examples/wenzhong_qa
+  260  2022-10-29 21:13:12 tail -f ./nohup.out 
+  261  2022-10-31 13:05:31 cd fengshen/examples/wenzhong_qa
+  262  2022-10-31 13:05:34 cd Fengshenbang-LM/
+  263  2022-10-31 13:05:35 cd fengshen/examples/wenzhong_qa
+  264  2022-10-31 13:05:37 tail -f ./nohup.out 
+  265  2022-10-31 13:05:48 conda activate ghostaienv
+  266  2022-10-31 13:05:54 nvidia-smi -l 1
+  267  2022-10-31 13:06:00 ls
+  268  2022-10-31 13:06:02 ls -lht
+  269  2022-10-31 13:06:06 less ./nohup.out
+  270  2022-10-31 13:06:11 tail -f ./nohup.out 
+  271  2022-10-31 13:06:20 tail -n100 ./nohup.out 
+  272  2022-10-31 13:06:59 ps aux | grep python
+  273  2022-10-31 13:07:01 top
+  274  2022-10-31 13:07:08 ls
+  275  2022-10-31 13:07:10 ls -lht
+  276  2022-10-31 13:07:22 history
+  277  2022-10-31 13:07:38 ls -lht /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/
+  278  2022-10-31 13:07:41 date
+  279  2022-10-31 13:07:49 ls -lht /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/log/
+  280  2022-10-31 13:07:52 ls -lht /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/log/MedicalQA-GPT2/
+  281  2022-10-31 13:07:57 ls -lht /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/log/MedicalQA-GPT2/version_2
+  282  2022-10-31 13:08:05 ls -lht /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/log/MedicalQA-GPT2/version_2/events.out.tfevents.1667020619.aiwriter005.2113539.0
+  283  2022-10-31 13:08:11 less /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/log/MedicalQA-GPT2/version_2/events.out.tfevents.1667020619.aiwriter005.2113539.0
+  284  2022-10-31 13:08:36 less /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/
+  285  2022-10-31 13:08:49 grep 'run_ts' ./nohup.out
+  286  2022-10-31 13:09:02 ls -lht /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/
+  287  2022-10-31 13:09:16 nvidia-smi -l 1
+  288  2022-10-31 13:11:13 tail -n500 ./nohup.out 
+  289  2022-10-31 13:12:46 ps aux | grep python
+  290  2022-10-31 13:22:44 nvidia-smi
+  291  2022-10-31 13:22:53 kill -9 2113539 2114699 2114708
+  292  2022-10-31 13:22:56 nvidia-smi
+  293  2022-10-31 13:23:00 ps aux | grep python
+  294  2022-10-31 13:23:04 nvidia-smi
+  295  2022-10-31 13:29:12 git pull
+  296  2022-10-31 13:39:10 ls /home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_add_zhihu_sougouwx_exp_1028_1667018672.csv.gz
+  297  2022-10-31 13:39:14 ls /home/ubuntu/cloudfs/ghost_data/merge_all_title_content/merged_all_title_content_add_zhihu_sougouwx_exp_1028_1667018672.csv.gz.done 
+  298  2022-10-31 13:39:22 ls
+  299  2022-10-31 13:39:33 mv ./nohup.out ./nohup.out.1027
+  300  2022-10-31 13:39:40 nohup bash ./finetune_GPT2_gen_content_merged_all_add_zhihou_sougouwx_exp_1028.sh &
+  301  2022-10-31 13:41:09 top
+  302  2022-10-31 13:39:47 tail -f ./nohup.out 
+  303  2022-10-31 21:29:36 conda activate ghostaienv
+  304  2022-10-31 21:29:39 cd Fengshenbang-LM/
+  305  2022-10-31 21:29:42 cd fengshen/examples/wenzhong_qa
+  306  2022-10-31 21:29:44 tail -f ./nohup.out 
+  307  2022-10-31 21:29:31 nvidia-smi -l 1
+  308  2022-11-01 21:51:00 conda activate ghostaienv
+  309  2022-11-01 21:51:04 cd fengshen/examples/wenzhong_qa
+  310  2022-11-01 21:51:09 tail -f ./nohup.out 
+  311  2022-11-01 21:51:14 cd Fengshenbang-LM/
+  312  2022-11-01 21:51:17 cd fengshen/examples/wenzhong_qa
+  313  2022-11-01 21:51:19 tail -f ./nohup.out 
+  314  2022-11-03 05:07:47 cd ~/Fengshenbang-LM/fengshen/examples/wenzhong_qa
+  315  2022-11-03 05:07:51 tail -f ./nohup.out 
+  316  2022-11-03 21:31:50 cd ~/Fengshenbang-LM/fengshen/examples/wenzhong_qa
+  317  2022-11-03 21:31:52 tail -f ./nohup.out 
+  318  2022-11-05 07:06:01 cd ~/Fengshenbang-LM/fengshen/examples/wenzhong_qa
+  319  2022-11-05 07:06:21 tail -f ./nohup.out 
+  320  2022-11-05 07:06:45 nvidia-smi -l 1
+  321  2022-11-05 07:06:52 cd /home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/gpt2_all_merged_gen_content_finetune_None
+  322  2022-11-05 07:06:53 ls
+  323  2022-11-05 07:06:58 cd ..
+  324  2022-11-05 07:06:58 ls
+  325  2022-11-05 07:07:10 ls -lth
+  326  2022-11-05 07:07:24 cd ckpt_1667194780
+  327  2022-11-05 07:07:25 ls
+  328  2022-11-05 09:26:52 mv ../gpt2_all_merged_gen_content_finetune_None ../gpt2_all_merged_gen_content_finetune_1667194780
+  329  2022-11-05 09:27:02 cd ../gpt2_all_merged_gen_content_finetune_1667194780
+  330  2022-11-05 09:27:03 ls
+  331  2022-11-05 09:30:27 cd ..
+  332  2022-11-05 09:30:33 mkdir logs
+  333  2022-11-05 09:30:36 cd log
+  334  2022-11-05 09:30:39 ls
+  335  2022-11-05 09:30:43 cd ../logs
+  336  2022-11-05 09:30:44 ls
+  337  2022-11-05 09:30:54 cp ~/Fengshenbang-LM/fengshen/examples/wenzhong_qa/nohup.out* ./
+  338  2022-11-05 09:31:13 cd ../../
+  339  2022-11-05 09:31:14 cd t5/
+  340  2022-11-05 09:31:15 ls
+  341  2022-11-05 09:31:17 mkdir logs
+  342  2022-11-05 09:31:19 cd logs/
+  343  2022-11-05 09:32:00 cd ~/Fengshenbang-LM/fengshen/examples/pretrain_t5/
+  344  2022-11-05 09:32:01 ls
+  345  2022-11-05 09:35:32 git status
+  346  2022-11-05 09:35:40 cd 
+  347  2022-11-05 09:35:41 ls
+  348  2022-11-05 09:35:53 conda activate ghostaienv
+  349  2022-11-05 09:36:57 cd Fengshenbang-LM/
+  350  2022-11-05 09:37:01 mkdir conda_env
+  351  2022-11-05 09:37:03 cd conda_env/
+  352  2022-11-05 09:37:07 conda env export | grep -v "^prefix: " > environment.yml
+  353  2022-11-05 09:37:19 history > history.txt
