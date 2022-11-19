@@ -105,8 +105,8 @@ DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/
 
 
 # for training
-train_data_file=/home/ubuntu/cloudfs/ghost_data/make_friends_live_streaming_guid/cleanedup_makes_friends_streaming_guid_prompted_train_1668805726.csv
-val_data_file=/home/ubuntu/cloudfs/ghost_data/make_friends_live_streaming_guid/cleanedup_makes_friends_streaming_guid_prompted_val_1668805726.csv
+train_data_file=/home/ubuntu/cloudfs/ghost_data/make_friends_live_streaming_guid/cleanedup_makes_friends_streaming_guid_prompted_train_1668878166.csv
+val_data_file=/home/ubuntu/cloudfs/ghost_data/make_friends_live_streaming_guid/cleanedup_makes_friends_streaming_guid_prompted_val_1668878166.csv
 # for test training, only sampled 1000 lines
 #train_data_file=merged_all_title_content_1017_1665986569_sample_test.csv.gz
 #val_data_file=merged_all_title_content_1017_1665986569_sample_test.csv.gz
