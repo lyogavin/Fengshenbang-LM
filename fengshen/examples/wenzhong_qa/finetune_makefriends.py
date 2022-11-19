@@ -12,6 +12,7 @@ import pytorch_lightning as pl
 import argparse
 import torch
 import os
+import random
 import sys
 sys.path.insert(0, '/cognitive_comp/wuziwei/codes/fengshen/fengshen')
 # sys.path.append('../../')
@@ -156,8 +157,8 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         return batch
 
     def validation_epoch_end(self, training_step_outputs):
-        for batch in training_step_outputs:
-            print(f"input text: {batch['prompt']}")
+        for bi, batch in enumerate(random.shuffle(training_step_outputs)[:10]):
+            print(f"--{bi}/{10}--- input text: {batch['prompt']}")
             prediction = generate_agent_paraphrase(self.model, self.tokenizer, batch['prompt_input_ids'])
             print(f"validation_samples:\nlabels: {batch['prompted_content']}\npredictions: {prediction}")
 
