@@ -72,6 +72,9 @@ class GPT2QADataset(Dataset):
         inputs_dict = self.tokenizer.encode_plus(item['prompted_content'],
                                                  max_length=self.max_seq_length, padding='max_length',
                                                  truncation=True, return_tensors='pt')
+        prompt_inputs_dict = self.tokenizer.encode_plus(item['prompt'],
+                                                 max_length=self.max_seq_length, padding='max_length',
+                                                 truncation=True, return_tensors='pt')
         target = inputs_dict['input_ids']
         labels = target.clone().detach()
         labels[target == self.tokenizer.pad_token_id] = -100
@@ -79,8 +82,9 @@ class GPT2QADataset(Dataset):
             "input_ids": inputs_dict['input_ids'].squeeze(),
             "attention_mask": inputs_dict['attention_mask'].squeeze(),
             "labels": labels.squeeze(),
-            "question": item['prompted_content'],
-            "answer": item['prompted_content']
+            "prompt_input_ids": prompt_inputs_dict['input_ids'].squeeze(),
+            "prompt": item['prompt'],
+            "prompted_content": item['prompted_content']
         }
 
 
