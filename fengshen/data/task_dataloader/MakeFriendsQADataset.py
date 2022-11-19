@@ -82,7 +82,7 @@ class GPT2QADataset(Dataset):
             "input_ids": inputs_dict['input_ids'].squeeze(),
             "attention_mask": inputs_dict['attention_mask'].squeeze(),
             "labels": labels.squeeze(),
-            "prompt_input_ids": prompt_inputs_dict['input_ids'], #.squeeze(),
+            "prompt_input_ids": prompt_inputs_dict['input_ids'].squeeze(),
             "prompt": item['prompt'],
             "prompted_content": item['prompted_content']
         }
