@@ -205,7 +205,7 @@ def main():
     if not args.do_eval_only:
         model = GPT2FinetuneMedicalQA(args,
                                       len(data_model.train_dataloader()),
-                                      tokenizer=data_model.tokenizer
+                                      tokenizer=data_model.valid_data.tokenizer
                                       )
         checkpoint_callback = GPT2FinetuneMedicalQAModelCheckpoint(
             args).callbacks
