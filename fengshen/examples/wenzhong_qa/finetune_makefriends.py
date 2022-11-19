@@ -215,6 +215,7 @@ def main():
             args.default_root_dir, 'log/'), name='MedicalQA-GPT2')
         trainer = Trainer.from_argparse_args(args,
                                              logger=logger,
+                                             evaluation_strategy='epoch',
                                              callbacks=[checkpoint_callback]
                                              )
         trainer.fit(model, data_model)

@@ -98,7 +98,6 @@ TRAINER_ARGS="
     --mode min \
     --save_last \
     --check_val_every_n_epoch 1 \
-    --evaluation_strategy epoch \
 "
 #DATA_DIR=/cognitive_comp/wuziwei/task-data/medical_qa
 
