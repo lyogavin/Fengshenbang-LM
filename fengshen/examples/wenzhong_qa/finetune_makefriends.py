@@ -168,7 +168,13 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         additional_cases = ["暗黑系美甲：","扫地机器人：","草原羊肉：","真无线蓝牙耳机："]
         for bi, item in enumerate(additional_cases):
             print(f"--{bi}/{len(additional_cases)}--- input text: {item}")
-            prediction = generate_agent_paraphrase(self.model, self.tokenizer, item)
+
+            prompt_inputs_dict = self.tokenizer.encode_plus(item,
+                                                            max_length=self.max_seq_length, padding=False,
+                                                            truncation=True, return_tensors='pt')
+
+
+            prediction = generate_agent_paraphrase(self.model, self.tokenizer, prompt_inputs_dict['input_ids'].squeeze())
             print(f"validation_samples:\npredictions: {prediction}")
 
             torch.cuda.empty_cache()
