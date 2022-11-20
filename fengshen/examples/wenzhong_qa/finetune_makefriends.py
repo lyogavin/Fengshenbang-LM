@@ -174,6 +174,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
                                                             truncation=True, return_tensors='pt')
 
             prompt_inputs_ids = prompt_inputs_dict['input_ids'].to("cuda")
+            print(f"shape prompt_inputs_ids: {prompt_inputs_ids.shape}")
             prediction = generate_agent_paraphrase(self.model, self.tokenizer, prompt_inputs_ids)
             print(f"validation_samples:\npredictions: {prediction}")
 
