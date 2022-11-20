@@ -170,7 +170,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
             print(f"--{bi}/{len(additional_cases)}--- input text: {item}")
 
             prompt_inputs_dict = self.tokenizer.encode_plus(item,
-                                                            max_length=self.max_seq_length, padding=False,
+                                                            max_length=100, padding=False,
                                                             truncation=True, return_tensors='pt')
 
 
