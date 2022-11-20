@@ -174,7 +174,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
                                                             truncation=True, return_tensors='pt')
 
 
-            prediction = generate_agent_paraphrase(self.model, self.tokenizer, prompt_inputs_dict['input_ids'].squeeze())
+            prediction = generate_agent_paraphrase(self.model, self.tokenizer, prompt_inputs_dict['input_ids'].squeeze()).to("cuda")
             print(f"validation_samples:\npredictions: {prediction}")
 
             torch.cuda.empty_cache()
