@@ -105,8 +105,8 @@ DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/
 
 
 # for training
-train_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content//pegasus_relevance_filtered_tags_to_title_ecomms_only_1120_train_1669045311.csv
-val_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content//pegasus_relevance_filtered_tags_to_title_ecomms_only_1120_val_1669045311.csv
+train_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content//pegasus_relevance_filtered_tags_to_title_ecomms_only_1120_train_1669124636.csv
+val_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content//pegasus_relevance_filtered_tags_to_title_ecomms_only_1120_val_1669124636.csv
 # for test training, only sampled 1000 lines
 #train_data_file=merged_all_title_content_1017_1665986569_sample_test.csv.gz
 #val_data_file=merged_all_title_content_1017_1665986569_sample_test.csv.gz
