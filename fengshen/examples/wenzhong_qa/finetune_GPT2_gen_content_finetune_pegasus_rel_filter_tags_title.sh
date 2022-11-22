@@ -132,7 +132,8 @@ MODEL_ARGS="
     --run_ts ${run_ts} \
 "
 
-SCRIPTS_PATH=/home/ubuntu/cloudfs/Fengshenbang-LM/fengshen/examples/wenzhong_qa/finetune_makefriends.py
+SCRIPTS_PATH=/home/ubuntu/cloudfs/Fengshenbang-LM/fengshen/examples/wenzhong_qa/finetune_relevance_filter.py
+
 
 export CMD=" \
     $SCRIPTS_PATH \
