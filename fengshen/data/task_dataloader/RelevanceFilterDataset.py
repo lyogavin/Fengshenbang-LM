@@ -69,10 +69,10 @@ class GPT2QADataset(Dataset):
         """
         将数据转换成模型训练的输入
         """
-        inputs_dict = self.tokenizer.encode_plus(f"关于{item['title']}的文案：{item['content']}",
+        inputs_dict = self.tokenizer.encode_plus(f"[关于{item['title']}的文案]：{item['content']}",
                                                  max_length=self.max_seq_length, padding='max_length',
                                                  truncation=True, return_tensors='pt')
-        prompt_inputs_dict = self.tokenizer.encode_plus(f"关于{item['title']}的文案：",
+        prompt_inputs_dict = self.tokenizer.encode_plus(f"[关于{item['title']}的文案]：",
                                                  max_length=self.max_seq_length, padding=False,
                                                  truncation=True, return_tensors='pt')
         target = inputs_dict['input_ids']
@@ -83,8 +83,8 @@ class GPT2QADataset(Dataset):
             "attention_mask": inputs_dict['attention_mask'].squeeze(),
             "labels": labels.squeeze(),
             "prompt_input_ids": prompt_inputs_dict['input_ids'].squeeze(),
-            "prompt": f"关于{item['title']}的文案：",
-            "prompted_content": f"关于{item['title']}的文案：{item['content']}"
+            "prompt": f"[关于{item['title']}的文案]：",
+            "prompted_content": f"[关于{item['title']}的文案]：{item['content']}"
         }
 
 

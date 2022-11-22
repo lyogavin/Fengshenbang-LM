@@ -165,7 +165,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
             print(f"validation_samples:\nlabels: {batch['prompted_content']}\npredictions: {prediction}")
 
             torch.cuda.empty_cache()
-        additional_cases = ["关于暗黑系美甲的文案：","关于高续航大功率扫地机器人的文案：","关于味道无敌的草原羊肉的文案：","关于极品音质真无线蓝牙耳机的文案："]
+        additional_cases = ["[关于暗黑系美甲的文案]：","[关于高续航大功率扫地机器人的文案]：","[关于味道无敌的草原羊肉的文案]：","[关于极品音质真无线蓝牙耳机的文案]："]
         for bi, item in enumerate(additional_cases):
             print(f"--{bi}/{len(additional_cases)}--- input text: {item}")
 
