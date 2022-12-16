@@ -40,7 +40,7 @@ def generate_agent_paraphrase(model, tokenizer, encoded_input_ids, return_count=
         'no_repeat_ngram_size': 4,
         'top_p': 0.85,
         # 'top_k':5,
-        'do_sample'True ,
+        'do_sample':True ,
         'early_stopping': True
     }
 
