@@ -31,7 +31,7 @@ def generate_agent_paraphrase(model, tokenizer, encoded_input_ids, return_count=
     model_generate_params = {
         'max_new_tokens': 80,
         # 'min_length':int(MAX_TARGET_LEN/3*2),
-        'num_beams': 4,
+        'num_beams': 2,
         'num_return_sequences': 2,
         'temperature': 1.1,
         'output_scores': True,
@@ -40,7 +40,7 @@ def generate_agent_paraphrase(model, tokenizer, encoded_input_ids, return_count=
         'no_repeat_ngram_size': 4,
         'top_p': 0.85,
         # 'top_k':5,
-        'do_sample': True,
+        'do_sample'True: ,
         'early_stopping': True
     }
 
