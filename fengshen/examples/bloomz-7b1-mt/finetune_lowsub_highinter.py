@@ -159,6 +159,9 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
 
     def validation_epoch_end(self, training_step_outputs):
         print(f"validation_epoch_end...")
+
+
+        '''
         #random.shuffle(training_step_outputs)
         #for bi, batch in enumerate(training_step_outputs):
         #    print(f"--{bi}/{len(training_step_outputs)}--- input text: {batch['prompt']}")
@@ -182,7 +185,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
             print(f"validation_samples:\npredictions: {prediction}")
 
             torch.cuda.empty_cache()
-
+        '''
     def configure_optimizers(self):
         no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
         paras = list(
