@@ -108,8 +108,8 @@ DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/
 train_data_file=/home/ubuntu/cloudfs/ghost_data/newred_redbook_link_download//redbook_tags_content_to_title_sim_tags_training_data_train_1208_1670534928.csv
 val_data_file=/home/ubuntu/cloudfs/ghost_data/newred_redbook_link_download//redbook_tags_content_to_title_sim_tags_training_data_val_1208_1670534928.csv
 # for test training, only sampled 1000 lines
-#train_data_file=/home/ubuntu/cloudfs/ghost_data/newred_redbook_link_download//redbook_tags_content_to_title_sim_tags_training_data_train_sample_1208_1670534928.csv
-#val_data_file=/home/ubuntu/cloudfs/ghost_data/newred_redbook_link_download//redbook_tags_content_to_title_sim_tags_training_data_train_sample_1208_1670534928.csv
+train_data_file=/home/ubuntu/cloudfs/ghost_data/newred_redbook_link_download//redbook_tags_content_to_title_sim_tags_training_data_train_sample_1208_1670534928.csv
+val_data_file=/home/ubuntu/cloudfs/ghost_data/newred_redbook_link_download//redbook_tags_content_to_title_sim_tags_training_data_train_sample_1208_1670534928.csv
 
 DATA_ARGS="
     --data_dir $DATA_DIR \
