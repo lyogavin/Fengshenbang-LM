@@ -13,11 +13,11 @@
 set -x -e
 
 run_ts=$(date +%s)
-echo "RUN TS: $(run_ts)"
+echo "RUN TS: $run_ts"
 
 echo "START TIME: $(date)"
 MICRO_BATCH_SIZE=1
-ROOT_DIR=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/gpt2/mt0
+ROOT_DIR=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/mt0_lowsub_highinter
 
 if [ ! -d ${ROOT_DIR} ];then
   mkdir -p ${ROOT_DIR}
