@@ -5,7 +5,7 @@ print(sys.path)
 
 from transformers import AutoTokenizer
 from transformers import MT5ForConditionalGeneration
-from data.task_dataloader.LowsubHighinterMTDataset import LowsubHighinterDataModel
+from data.task_dataloader.LowsubHighinterMT0Dataset import LowsubHighinterDataModel
 from transformers.optimization import get_linear_schedule_with_warmup
 from pytorch_lightning import Trainer, loggers
 from pytorch_lightning.callbacks import ModelCheckpoint
