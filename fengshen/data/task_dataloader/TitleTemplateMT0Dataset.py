@@ -70,7 +70,7 @@ class GPT2QADataset(Dataset):
         """
         将数据转换成模型训练的输入
         """
-        prompted_content = f"根据以下内容给出小红书笔记标题：{item['content']}"
+        #prompted_content = f"根据以下内容给出小红书笔记标题：{item['content']}"
         prompted_content = f"根据以下内容给出\"{item['title_template_name']}\"类型的标题：{item['top_tags_pass_threshold_str']}"
         #prompted_content = f"根据指定内容，撰写爆款小红书笔记标题：\n：需要起标题的内容：[{item['content']}]\n小红书标题：[{item['title']}]"
         inputs_dict = self.tokenizer.encode_plus(prompted_content,
