@@ -226,7 +226,7 @@ def main():
     total_parser.add_argument('--output_save_path',
                               default='./predict.json', type=str)
     # * Args for data preprocessing
-    total_parser = LowsubHighinterDataModel.add_data_specific_args(total_parser)
+    total_parser = TitleTemplateDataModel.add_data_specific_args(total_parser)
     # * Args for training
     total_parser = Trainer.add_argparse_args(total_parser)
     total_parser = GPT2FinetuneMedicalQAModelCheckpoint.add_argparse_args(
@@ -237,7 +237,7 @@ def main():
 
     print(f"args:{args}")
 
-    data_model = LowsubHighinterDataModel(args)
+    data_model = TitleTemplateDataModel(args)
     if not args.do_eval_only:
         model = GPT2FinetuneMedicalQA(args,
                                       len(data_model.train_dataloader()),
