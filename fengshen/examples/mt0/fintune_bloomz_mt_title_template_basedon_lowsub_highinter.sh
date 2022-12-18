@@ -105,11 +105,11 @@ DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/
 
 
 # for training
-train_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/title_template_batch2_train_1211_1670803411.csv
-val_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/title_template_batch2_val_1211_1670803411.csv
+train_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/title_template_batch2_sim_tags_train_1211_1670803411.csv
+val_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/title_template_batch2_sim_tags_val_1211_1670803411.csv
 # for test training, only sampled 1000 lines
-train_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/title_template_batch2_train_sample_1211_1670803411.csv
-val_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/title_template_batch2_train_sample_1211_1670803411.csv
+train_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/title_template_batch2_sim_tags_train_sample_1211_1670803411.csv
+val_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/title_template_batch2_sim_tags_train_sample_1211_1670803411.csv
 
 DATA_ARGS="
     --data_dir $DATA_DIR \
