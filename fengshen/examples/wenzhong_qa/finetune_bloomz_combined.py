@@ -134,7 +134,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
                             attention_mask=batch['attention_mask'], labels=batch['labels'])
         # output = self.model(input_ids=batch['input_ids'], labels=batch['labels'])
         # acc = self.comput_metrix(output.logits, batch['labels'])
-        self.log('train_loss', output.loss)
+        self.log('train_loss', output.loss, on_epoch=True)
         return output.loss
 
     def comput_metrix(self, logits, labels):
@@ -150,7 +150,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
                             attention_mask=batch['attention_mask'], labels=batch['labels'])
         # output = self.model(input_ids=batch['input_ids'], labels=batch['labels'])
         # acc = self.comput_metrix(output.logits, batch['labels'])
-        self.log('val_loss', output.loss)
+        self.log('val_loss', output.loss, sync_dist=True, on_epoch=True)
         # self.log('val_acc', acc)
         #print(f"input ids : {batch['input_ids']}")
 
@@ -165,10 +165,10 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         #    print(f"validation_samples:\nlabels: {batch['prompted_content']}\npredictions: {prediction}")
 
         torch.cuda.empty_cache()
-        additional_cases = ["根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[暗黑系美甲]\n小红书标题：[",
-                            "根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[扫地机器人]\n小红书标题：[",
-                            "根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[草原羊肉]\n小红书标题：[",
-                            "根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[真无线蓝牙耳机]\n小红书标题：["]
+        additional_cases = ["根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[暗黑系美甲]\n最适合的标题类型：构造悬念。\n小红书标题：[",
+                            "根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[扫地机器人]\n最适合的标题类型：构造悬念。\n小红书标题：[",
+                            "根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[草原羊肉]\n最适合的标题类型：构造悬念。\n小红书标题：[",
+                            "根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[真无线蓝牙耳机]\n最适合的标题类型：构造悬念。\n小红书标题：["]
         for bi, item in enumerate(additional_cases):
             print(f"--{bi}/{len(additional_cases)}--- input text: {item}")
 
