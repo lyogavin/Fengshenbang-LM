@@ -291,10 +291,10 @@ def main(args):
 
         #wanddb_logger = loggers.WandbLogger(save_dir=os.path.join(
         #    args.default_root_dir, 'log/'), name='bloomz_combined')
-        #csv_logger = loggers.CSVLogger(save_dir=os.path.join(
-        #    args.default_root_dir, 'log/'), name='bloomz_combined')
+        csv_logger = loggers.CSVLogger(save_dir=os.path.join(
+            args.default_root_dir, 'log/'), name='bloomz_combined')
         trainer = Trainer.from_argparse_args(args,
-                                             logger=logger, #[logger,csv_logger],
+                                             logger=[logger,csv_logger],
                                              #evaluation_strategy='epoch',
                                              callbacks=[checkpoint_callback]
                                              )
