@@ -174,3 +174,26 @@ if __name__ == '__main__':
         deres = testml.tokenizer.decode(res['input_ids'])
         print(f"decoded encode: {deres}")
 
+
+    for i in range(100, 15, -1):
+        print(f"\nfor max len: {i}")
+        testml.max_seq_length = i
+
+        res = testml.encode({"title_type":"step3_template_1229",
+                             "title_template_name":"挑剔模版1",
+                             'content':'将数据转换成模型训练的输入将数据转换成模型训练的输入将数据转换成模型训练的输入', 'title':'将数据转换成模型训练的输入'})
+
+        print(f"encode len: {res['input_ids'].shape}")
+        deres = testml.tokenizer.decode(res['input_ids'])
+        print(f"decoded encode: {deres}")
+
+
+    for i in range(100, 15, -1):
+        print(f"\nfor max len: {i}")
+        testml.max_seq_length = i
+
+        res = testml.encode({"title_type":"step4_suspences_1229", 'content':'将数据转换成模型训练的输入将数据转换成模型训练的输入将数据转换成模型训练的输入', 'title':'将数据转换成模型训练的输入'})
+
+        print(f"encode len: {res['input_ids'].shape}")
+        deres = testml.tokenizer.decode(res['input_ids'])
+        print(f"decoded encode: {deres}")
