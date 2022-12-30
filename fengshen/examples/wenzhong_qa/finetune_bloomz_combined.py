@@ -382,4 +382,4 @@ if __name__ == '__main__':
     input_ids = torch.tensor([prefix_input_ids + postfix_input_ids])
     mask = torch.tensor([[0] * len(prefix_input_ids) + [1] * len(postfix_input_ids)])
 
-    out = logits_labels_mask_to_loss(torch.tensor([[[0.5]] * (len(prefix_input_ids)+len(postfix_input_ids))]), input_ids, mask, verbose=True)
+    out = logits_labels_mask_to_loss(torch.tensor([[[0.5] * 1000] * (len(prefix_input_ids)+len(postfix_input_ids))]), input_ids, mask, verbose=True)
