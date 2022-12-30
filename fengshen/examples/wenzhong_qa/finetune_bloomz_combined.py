@@ -206,7 +206,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         print(f"\ntraining_epoch_end...")
         gathered = self.all_gather(training_step_outputs)
         if self.global_rank == 0:
-            # print(gathered)
+            print(gathered)
             loss = sum(output['loss'].mean() for output in gathered) / len(training_step_outputs)
             print(f"train loss:{loss.item()}")
 
@@ -214,7 +214,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         print(f"\nvalidation_epoch_end...")
         gathered = self.all_gather(training_step_outputs)
         if self.global_rank == 0:
-            # print(gathered)
+            print(gathered)
             loss = sum(output['loss'].mean() for output in gathered) / len(training_step_outputs)
             print(f"val loss:{loss.item()}")
 
