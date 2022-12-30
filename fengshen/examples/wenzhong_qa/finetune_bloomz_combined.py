@@ -15,6 +15,7 @@ import torch
 import os
 import random
 import sys
+import logging
 sys.path.insert(0, '/cognitive_comp/wuziwei/codes/fengshen/fengshen')
 # sys.path.append('../../')
 # sys.path.append('../')
@@ -113,7 +114,7 @@ def logits_labels_mask_to_loss(logits, labels, mask, verbose=False):
     # Shift so that tokens < n predict n
     shift_logits = lm_logits[..., :-1, :].contiguous()
     shift_labels = labels[..., 1:].contiguous()
-    shift_labels_mask = batch['labels_mask'][..., 1:].contiguous()
+    shift_labels_mask = mask[..., 1:].contiguous()
     batch_size, seq_length, vocab_size = shift_logits.shape
     if verbose:
         print(f"shift_logits shape: {shift_logits.shape}")
@@ -255,27 +256,12 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         }]
 
 
-def main():
-    total_parser = argparse.ArgumentParser("Summary Task")
-    total_parser.add_argument(
-        '--run_ts', default=None, type=str)
-    total_parser.add_argument(
-        '--do_eval_only', action='store_true', default=False)
-    total_parser.add_argument(
-        '--pretrained_model_path', default=None, type=str)
-    total_parser.add_argument('--output_save_path',
-                              default='./predict.json', type=str)
-    # * Args for data preprocessing
-    total_parser = GPT2QADataModel.add_data_specific_args(total_parser)
-    # * Args for training
-    total_parser = Trainer.add_argparse_args(total_parser)
-    total_parser = GPT2FinetuneMedicalQAModelCheckpoint.add_argparse_args(
-        total_parser)
-    total_parser = GPT2FinetuneMedicalQA.add_model_specific_args(total_parser)
-    # * Args for base model
-    args = total_parser.parse_args()
+def main(args):
+    # configure logging on module level, redirect to file
+    logger = logging.getLogger("pytorch_lightning.core")
 
-    print(f"args:{args}")
+    logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
     data_model = GPT2QADataModel(args)
     if not args.do_eval_only:
@@ -318,9 +304,8 @@ def main():
             '/cognitive_comp/wuziwei/pretrained_model_hf')
 
 
-if __name__ == '__main__':
-    #main()
 
+def test():
     from transformers import AutoTokenizer
     # from fengshen.examples.pegasus.tokenizers_pegasus import PegasusTokenizer
     # from transformers import PegasusForConditionalGeneration
@@ -366,3 +351,33 @@ if __name__ == '__main__':
     mask = torch.tensor([[0] * len(prefix_input_ids) + [1] * len(postfix_input_ids)])
 
     out = logits_labels_mask_to_loss(torch.tensor([[[0.5] * 500000] * (len(prefix_input_ids)+len(postfix_input_ids))]), input_ids, mask, verbose=True)
+
+if __name__ == '__main__':
+    total_parser = argparse.ArgumentParser("Summary Task")
+    total_parser.add_argument(
+        '--run_ts', default=None, type=str)
+    total_parser.add_argument(
+        '--test_only', action='store_true', default=False)
+    total_parser.add_argument(
+        '--do_eval_only', action='store_true', default=False)
+    total_parser.add_argument(
+        '--pretrained_model_path', default=None, type=str)
+    total_parser.add_argument('--output_save_path',
+                              default='./predict.json', type=str)
+    # * Args for data preprocessing
+    total_parser = GPT2QADataModel.add_data_specific_args(total_parser)
+    # * Args for training
+    total_parser = Trainer.add_argparse_args(total_parser)
+    total_parser = GPT2FinetuneMedicalQAModelCheckpoint.add_argparse_args(
+        total_parser)
+    total_parser = GPT2FinetuneMedicalQA.add_model_specific_args(total_parser)
+    # * Args for base model
+    args = total_parser.parse_args()
+
+    print(f"args:{args}")
+
+    if args.test_only:
+        test()
+    else:
+
+        main()
