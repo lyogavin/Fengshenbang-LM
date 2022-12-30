@@ -87,7 +87,7 @@ class GPT2QADataset(Dataset):
 
 
         input_ids = torch.tensor([prefix_input_ids + postfix_input_ids])
-        attention_mask = torch.tensor([[1] * (len(postfix_input_ids) + len(prefix_input_ids)]))
+        attention_mask = torch.tensor([[1] * (len(postfix_input_ids) + len(prefix_input_ids))])
 
         #inputs_dict = self.tokenizer.encode_plus(item['prompted_content'],
         #                                         max_length=self.max_seq_length, padding='max_length',
