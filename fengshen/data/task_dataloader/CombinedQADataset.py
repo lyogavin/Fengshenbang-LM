@@ -147,15 +147,15 @@ class GPT2QADataModel(pl.LightningDataModule):
 
 
 if __name__ == '__main__':
-    #import argparse
+    import argparse
     #modelfile = '/cognitive_comp/wuziwei/pretrained_model_hf/medical_v2'
     datafile = '/home/ubuntu/cloudfs/ghost_data/combined_high_inter_template_suspences/combined_high_inter_template_suspences_val_sample_1229_1672366480.csv'
-    #parser = argparse.ArgumentParser(description='hf test', allow_abbrev=False)
-    #group = parser.add_argument_group(title='test args')
-    #group.add_argument('--pretrained-model-path', type=str, default=modelfile,
-    #                   help='Number of transformer layers.')
-    #group.add_argument('--max-seq-length', type=int, default=1024)
-    #args = parser.parse_args()
+    parser = argparse.ArgumentParser(description='hf test', allow_abbrev=False)
+    group = parser.add_argument_group(title='test args')
+    group.add_argument('--pretrained-model-path', type=str, default="/home/ubuntu/cloudfs/saved_models/bigscience/bloomz-3b",
+                       help='Number of transformer layers.')
+    group.add_argument('--max-seq-length', type=int, default=1024)
+    args = parser.parse_args()
 
     testml = GPT2QADataset(datafile, 'medical_qa')#, args=args)
 
