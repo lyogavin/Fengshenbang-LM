@@ -71,13 +71,13 @@ class GPT2QADataset(Dataset):
         """
         if item['title_type'] == 'step2_high_inter_1229':
             postfix_prompted_content = f"]\n小红书标题：[{item['title']}]"
-            prompted_content = f"根据指定内容，撰写爆款小红书笔记标题：\n：需要起标题的内容：[{item['content']}"
+            prompted_content = f"根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[{item['content']}"
         elif item['title_type'] == 'step3_template_1229':
             postfix_prompted_content = f"]\n标题模版：[{item['title_template_name']}]\n标题：[{item['title']}]"
             prompted_content = f"根据指定内容和指定的标题模版，撰写爆款小红书笔记标题。\n需要起标题的内容：[{item['content']}"
         elif item['title_type'] == 'step4_suspences_1229':
             postfix_prompted_content = f"]\n构造悬念类型的小红书标题：[{item['title']}]"
-            prompted_content = f"根据指定内容，构造悬念，撰写小红书笔记标题：\n：需要起标题的内容：[{item['content']}"
+            prompted_content = f"根据指定内容，构造悬念，撰写小红书笔记标题。\n需要起标题的内容：[{item['content']}"
         else:
             assert False
 
@@ -163,11 +163,14 @@ if __name__ == '__main__':
     print(len(testml))
     print(f"max len:{testml.max_seq_length}")
 
-    testml.max_seq_length = 100
 
-    res = testml.encode({"title_type":"step2_high_inter_1229", 'title':'将数据转换成模型训练的输入将数据转换成模型训练的输入将数据转换成模型训练的输入', 'content':'将数据转换成模型训练的输入'})
+    for i in range(100, 15, -1):
+        print(f"\nfor max len: {i}")
+        testml.max_seq_length = 100
 
-    print(res)
-    deres = testml.tokenizer.decode(res['input_ids'])
-    print(deres)
+        res = testml.encode({"title_type":"step2_high_inter_1229", 'content':'将数据转换成模型训练的输入将数据转换成模型训练的输入将数据转换成模型训练的输入', 'title':'将数据转换成模型训练的输入'})
+
+        print(f"encode len: {res['input_ids'].shape}")
+        deres = testml.tokenizer.decode(res['input_ids'])
+        print(f"decoded encode: {deres}")
 
