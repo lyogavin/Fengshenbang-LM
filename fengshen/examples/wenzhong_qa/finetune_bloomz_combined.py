@@ -288,8 +288,12 @@ def main(args):
             args).callbacks
         logger = loggers.TensorBoardLogger(save_dir=os.path.join(
             args.default_root_dir, 'log/'), name='bloomz_combined')
+
+        wanddb_logger = loggers.WandbLogger(save_dir=os.path.join(
+            args.default_root_dir, 'log/'), name='bloomz_combined')
+
         trainer = Trainer.from_argparse_args(args,
-                                             logger=logger,
+                                             logger=[logger,wanddb_logger],
                                              #evaluation_strategy='epoch',
                                              callbacks=[checkpoint_callback]
                                              )
