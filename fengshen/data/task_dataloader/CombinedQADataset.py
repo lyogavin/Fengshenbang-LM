@@ -73,11 +73,11 @@ class GPT2QADataset(Dataset):
             postfix_prompted_content = f"]\n小红书标题：[{item['title']}]"
             prompted_content = f"根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[{item['content']}"
         elif item['title_type'] == 'step3_template_1229':
-            postfix_prompted_content = f"]\n标题模版：[{item['title_template_name']}]\n标题：[{item['title']}]"
-            prompted_content = f"根据指定内容和指定的标题模版，撰写爆款小红书笔记标题。\n需要起标题的内容：[{item['content']}"
+            postfix_prompted_content = f"]\n最适合的标题类型：标题模版[{item['title_template_name']}]。\n小红书标题：[{item['title']}]"
+            prompted_content = f"根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[{item['content']}"
         elif item['title_type'] == 'step4_suspences_1229':
-            postfix_prompted_content = f"]\n构造悬念类型的小红书标题：[{item['title']}]"
-            prompted_content = f"根据指定内容，构造悬念，撰写小红书笔记标题。\n需要起标题的内容：[{item['content']}"
+            postfix_prompted_content = f"]\n最适合的标题类型：构造悬念。\n小红书标题：[{item['title']}]"
+            prompted_content = f"根据指定内容，撰写爆款小红书笔记标题。。\n需要起标题的内容：[{item['content']}"
         else:
             assert False
 
