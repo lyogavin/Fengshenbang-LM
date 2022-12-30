@@ -118,7 +118,7 @@ DATA_ARGS="
     --train_data  $train_data_file \
     --valid_data  $val_data_file \
     --test_data  $val_data_file \
-    --max_seq_length 250 \
+    --max_seq_length 500 \
 "
 
 # PRETRAINED_MODEL_PATH=/cognitive_comp/wuziwei/pretrained_model_hf/gpt2
