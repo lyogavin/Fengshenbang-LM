@@ -161,3 +161,11 @@ if __name__ == '__main__':
 
     print(testml[10])
     print(len(testml))
+    print(f"max len:{testml.max_seq_length}")
+
+    testml.max_seq_length = 100
+
+    res = testml.encode({"title_type":"step2_high_inter_1229", 'title':'将数据转换成模型训练的输入将数据转换成模型训练的输入将数据转换成模型训练的输入', 'content':'将数据转换成模型训练的输入'})
+
+    testml.tokenizer.decode(res['input_ids'])
+
