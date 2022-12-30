@@ -198,6 +198,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         # Shift so that tokens < n predict n
         shift_logits = lm_logits[..., :-1, :].contiguous()
         shift_labels = batch['labels'][..., 1:].contiguous()
+        shift_labels_mask = batch['labels_mask'][..., 1:].contiguous()
         batch_size, seq_length, vocab_size = shift_logits.shape
 
         # Flatten the tokens
@@ -205,7 +206,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         loss = loss_fct(
             shift_logits.view(batch_size * seq_length, vocab_size), shift_labels.view(batch_size * seq_length)
         ).view(batch_size, seq_length)
-        loss_masked = loss * batch['labels_mask']
+        loss_masked = loss * shift_labels_mask
         loss = torch.mean(loss_masked)
 
 
