@@ -160,3 +160,4 @@ if __name__ == '__main__':
     testml = GPT2QADataset(datafile, 'medical_qa', args=args)
 
     print(testml[10])
+    print(len(testml))
