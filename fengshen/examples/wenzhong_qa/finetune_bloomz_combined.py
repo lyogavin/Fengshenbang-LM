@@ -176,7 +176,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
 
         # output = self.model(input_ids=batch['input_ids'], labels=batch['labels'])
         # acc = self.comput_metrix(output.logits, batch['labels'])
-        self.log('train_loss', loss, on_epoch=True)
+        self.log('train_loss', loss)#, on_epoch=True)
         return loss
 
     def comput_metrix(self, logits, labels):
@@ -196,7 +196,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
 
         loss = logits_labels_mask_to_loss(output.logits, batch['labels'], batch['labels_mask'])
 
-        self.log('val_loss', loss, sync_dist=True, on_epoch=True)
+        self.log('val_loss', loss, sync_dist=True)#, on_epoch=True)
         # self.log('val_acc', acc)
         #print(f"input ids : {batch['input_ids']}")
 
