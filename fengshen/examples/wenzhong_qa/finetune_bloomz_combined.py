@@ -15,7 +15,7 @@ import torch
 import os
 import random
 import sys
-import logging
+#import logging
 sys.path.insert(0, '/cognitive_comp/wuziwei/codes/fengshen/fengshen')
 # sys.path.append('../../')
 # sys.path.append('../')
