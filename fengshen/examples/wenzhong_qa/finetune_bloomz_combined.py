@@ -165,7 +165,10 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         #    print(f"validation_samples:\nlabels: {batch['prompted_content']}\npredictions: {prediction}")
 
         torch.cuda.empty_cache()
-        additional_cases = ["暗黑系美甲：","扫地机器人：","草原羊肉：","真无线蓝牙耳机："]
+        additional_cases = ["根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[暗黑系美甲]\n小红书标题：[",
+                            "根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[扫地机器人]\n小红书标题：[",
+                            "根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[草原羊肉]\n小红书标题：[",
+                            "根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[真无线蓝牙耳机]\n小红书标题：["]
         for bi, item in enumerate(additional_cases):
             print(f"--{bi}/{len(additional_cases)}--- input text: {item}")
 
