@@ -91,6 +91,7 @@ TRAINER_ARGS="
     --accumulate_grad_batches 8 \
     --gpus 4 \
     --num_nodes 1 \
+    --log_every_n_steps 1 \
     --strategy deepspeed_stage_2 \
     --default_root_dir $ROOT_DIR \
     --dirpath $checkpoint_path \
