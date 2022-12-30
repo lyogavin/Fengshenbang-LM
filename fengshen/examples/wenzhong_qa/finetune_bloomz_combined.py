@@ -113,6 +113,7 @@ def logits_labels_mask_to_loss(logits, labels, mask, verbose=False):
     # Shift so that tokens < n predict n
     shift_logits = lm_logits[..., :-1, :].contiguous()
     shift_labels = labels[..., 1:].contiguous()
+    shift_labels_mask = batch['labels_mask'][..., 1:].contiguous()
     batch_size, seq_length, vocab_size = shift_logits.shape
     if verbose:
         print(f"shift_logits shape: {shift_logits.shape}")
@@ -125,7 +126,7 @@ def logits_labels_mask_to_loss(logits, labels, mask, verbose=False):
     if verbose:
         print(f"loss shape: {loss.shape}")
 
-    loss_masked = loss * mask
+    loss_masked = loss * shift_labels_mask
     loss = torch.mean(loss_masked)
     if verbose:
         print(f"mask: {mask}")
@@ -192,26 +193,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         # acc = self.comput_metrix(output.logits, batch['labels'])
 
 
-        # logits output:
-        lm_logits = output.logits
-
-        # Shift so that tokens < n predict n
-        shift_logits = lm_logits[..., :-1, :].contiguous()
-        shift_labels = batch['labels'][..., 1:].contiguous()
-        shift_labels_mask = batch['labels_mask'][..., 1:].contiguous()
-        batch_size, seq_length, vocab_size = shift_logits.shape
-
-        # Flatten the tokens
-        loss_fct = CrossEntropyLoss(reduction='none')
-        loss = loss_fct(
-            shift_logits.view(batch_size * seq_length, vocab_size), shift_labels.view(batch_size * seq_length)
-        ).view(batch_size, seq_length)
-        loss_masked = loss * shift_labels_mask
-        loss = torch.mean(loss_masked)
-
-
-
-
+        loss = logits_labels_mask_to_loss(output.logits, batch['labels'], batch['labels_mask'])
 
         self.log('val_loss', loss, sync_dist=True, on_epoch=True)
         # self.log('val_acc', acc)
