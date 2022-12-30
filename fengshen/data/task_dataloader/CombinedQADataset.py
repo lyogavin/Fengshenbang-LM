@@ -73,18 +73,21 @@ class GPT2QADataset(Dataset):
             postfix_prompted_content = f"]\n小红书标题：[{item['title']}]"
             prompted_content = f"根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[{item['content']}"
         elif item['title_type'] == 'step3_template_1229':
-            postfix_prompted_content = f"]\n最适合的标题类型：标题模版[{item['title_template_name']}]。\n小红书标题：[{item['title']}]"
+            postfix_prompted_content = f"]\n最适合的标题类型：标题模版（根据句式[{item['title_template_name']}]改写标题）。\n小红书标题：[{item['title']}]"
             prompted_content = f"根据指定内容，撰写爆款小红书笔记标题。\n需要起标题的内容：[{item['content']}"
         elif item['title_type'] == 'step4_suspences_1229':
-            postfix_prompted_content = f"]\n最适合的标题类型：构造悬念。\n小红书标题：[{item['title']}]"
+            postfix_prompted_content = f"]\n最适合的标题类型：构造悬念（强调结果，保留部分信息，引发好奇）。\n小红书标题：[{item['title']}]"
             prompted_content = f"根据指定内容，撰写爆款小红书笔记标题。。\n需要起标题的内容：[{item['content']}"
         else:
             assert False
 
         postfix_input_ids = self.tokenizer.encode(postfix_prompted_content)
+
         prefix_input_ids = self.tokenizer.encode(prompted_content, truncation=True, max_length=self.max_seq_length - len(postfix_input_ids))
+
+
         input_ids = torch.tensor([prefix_input_ids + postfix_input_ids])
-        attention_mask = torch.tensor([1] * (len(postfix_input_ids) + len(prefix_input_ids)))
+        attention_mask = torch.tensor([[1] * (len(postfix_input_ids) + len(prefix_input_ids)]))
 
         #inputs_dict = self.tokenizer.encode_plus(item['prompted_content'],
         #                                         max_length=self.max_seq_length, padding='max_length',
@@ -98,7 +101,9 @@ class GPT2QADataset(Dataset):
         return {
             "input_ids": input_ids.squeeze(),
             "attention_mask": attention_mask.squeeze(),
-            "labels": labels.squeeze()
+            "labels": labels.squeeze(),
+            "labels_mask": torch.tensor([[0] * len(prefix_input_ids) + [1] * len(postfix_input_ids)])
+            #"answer_end_pos":len(answer_input_ids) + len(postfix_input_ids) + len(prefix_input_ids) - 1
         }
 
 

@@ -7,6 +7,7 @@ from transformers import BloomForCausalLM
 from data.task_dataloader.CombinedQADataset import GPT2QADataModel
 from transformers.optimization import get_linear_schedule_with_warmup
 from pytorch_lightning import Trainer, loggers
+from torch.nn import CrossEntropyLoss
 from pytorch_lightning.callbacks import ModelCheckpoint
 import pytorch_lightning as pl
 import argparse
@@ -103,6 +104,36 @@ class GPT2FinetuneMedicalQAModelCheckpoint:
     def on_epoch_end(self, args, state, control, **kwargs):
         super().on_epoch_end(*args, **kwargs)
 
+def logits_labels_mask_to_loss(logits, labels, mask, verbose=False):
+    # logits output:
+    lm_logits = logits
+    if verbose:
+        print(f"logits shape: {logits}")
+
+    # Shift so that tokens < n predict n
+    shift_logits = lm_logits[..., :-1, :].contiguous()
+    shift_labels = labels[..., 1:].contiguous()
+    batch_size, seq_length, vocab_size = shift_logits.shape
+    if verbose:
+        print(f"shift_logits shape: {shift_logits.shape}")
+
+    # Flatten the tokens
+    loss_fct = CrossEntropyLoss(reduction='none')
+    loss = loss_fct(
+        shift_logits.view(batch_size * seq_length, vocab_size), shift_labels.view(batch_size * seq_length)
+    ).view(batch_size, seq_length)
+    if verbose:
+        print(f"loss shape: {loss.shape}")
+
+    loss_masked = loss * mask
+    loss = torch.mean(loss_masked)
+    if verbose:
+        print(f"mask: {mask}")
+    if verbose:
+        print(f"loss: {loss}")
+
+    return loss
+
 class GPT2FinetuneMedicalQA(pl.LightningModule):
 
     @staticmethod
@@ -129,13 +160,22 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
                                   (max(1, num_gpus) * self.trainer.accumulate_grad_batches))
             print('Total training step:', self.total_step)
 
+
+    # !!!! following: https://github.com/MehwishFatimah/GPT2_Summarization/blob/7bd72af159d6859e12a7af646ec5435020de631a/modules/training.py#L88
+    # https://github.com/huggingface/transformers/blob/v4.25.1/src/transformers/models/bloom/modeling_bloom.py#L864
+    # only consider loss for the answering part!!!!
     def training_step(self, batch, batch_idx):
         output = self.model(input_ids=batch['input_ids'],
                             attention_mask=batch['attention_mask'], labels=batch['labels'])
+
+
+        loss = logits_labels_mask_to_loss(output.logits, batch['labels'], batch['labels_mask'])
+
+
         # output = self.model(input_ids=batch['input_ids'], labels=batch['labels'])
         # acc = self.comput_metrix(output.logits, batch['labels'])
-        self.log('train_loss', output.loss, on_epoch=True)
-        return output.loss
+        self.log('train_loss', loss, on_epoch=True)
+        return loss
 
     def comput_metrix(self, logits, labels):
         y_pred = torch.argmax(logits, dim=-1)
@@ -150,7 +190,29 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
                             attention_mask=batch['attention_mask'], labels=batch['labels'])
         # output = self.model(input_ids=batch['input_ids'], labels=batch['labels'])
         # acc = self.comput_metrix(output.logits, batch['labels'])
-        self.log('val_loss', output.loss, sync_dist=True, on_epoch=True)
+
+
+        # logits output:
+        lm_logits = output.logits
+
+        # Shift so that tokens < n predict n
+        shift_logits = lm_logits[..., :-1, :].contiguous()
+        shift_labels = batch['labels'][..., 1:].contiguous()
+        batch_size, seq_length, vocab_size = shift_logits.shape
+
+        # Flatten the tokens
+        loss_fct = CrossEntropyLoss(reduction='none')
+        loss = loss_fct(
+            shift_logits.view(batch_size * seq_length, vocab_size), shift_labels.view(batch_size * seq_length)
+        ).view(batch_size, seq_length)
+        loss_masked = loss * batch['labels_mask']
+        loss = torch.mean(loss_masked)
+
+
+
+
+
+        self.log('val_loss', loss, sync_dist=True, on_epoch=True)
         # self.log('val_acc', acc)
         #print(f"input ids : {batch['input_ids']}")
 
@@ -274,4 +336,50 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    #main()
+
+    from transformers import AutoTokenizer
+    # from fengshen.examples.pegasus.tokenizers_pegasus import PegasusTokenizer
+    # from transformers import PegasusForConditionalGeneration
+    from transformers import BloomForCausalLM
+
+
+    TOKENIER_MODEL_NAME = '/home/ubuntu/cloudfs/saved_models/bigscience/bloomz-3b'
+    tokenizer = AutoTokenizer.from_pretrained(TOKENIER_MODEL_NAME)
+
+    USE_PROXY = False
+    from transformers import BloomForCausalLM
+
+    # model = T5ForConditionalGeneration.from_pretrained(MODEL_NAME)
+    # model = T5ForConditionalGeneration.from_pretrained(MODEL_NAME)
+    if USE_PROXY:
+        model = BloomForCausalLM.from_pretrained(TOKENIER_MODEL_NAME,
+                                                 proxies={'http': '43.159.130.13:8123'})
+    else:
+        model = BloomForCausalLM.from_pretrained(TOKENIER_MODEL_NAME)
+
+    MODEL_NAME = '/home/ubuntu/cloudfs/saved_models/__home__ubuntu__cloudfs__huggingfacecache__bloom-1b7_1670626768_e2_step6017_loss1.1577339172363281'
+    MODEL_NAME = '/home/ubuntu/cloudfs/saved_models/__home__ubuntu__cloudfs__huggingfacecache__bloom-1b7_1670642874_e2_step6017_loss0.9104998707771301'
+    MODEL_NAME = '/home/ubuntu/cloudfs_nfs/saved_models/deep_speed_experiments/bloomz/combined_highinter_template_suspence/' \
+                 'ckpt_1672379305/model-epoch=00-train_loss=1.1602.ckpt/checkpoint/mp_rank_00_model_states.pt'
+
+    state_dict = torch.load(MODEL_NAME, map_location=torch.device('cpu'))
+    model.load_state_dict({k[len('module.model.'):]: v for k, v in state_dict['module'].items()})
+    del state_dict
+    torch.cuda.empty_cache()
+
+    content = '将数据转换成模型训练的输入将数据转换成模型训练的输入将数据转换成模型训练的输入'
+    title = '将数据转换成模型训练的输入'
+
+    postfix_prompted_content = f"]\n最适合的标题类型：构造悬念（强调结果，保留部分信息，引发好奇）。\n小红书标题：[{content}]"
+    prompted_content = f"根据指定内容，撰写爆款小红书笔记标题。。\n需要起标题的内容：[{title}"
+
+    postfix_input_ids = tokenizer.encode(postfix_prompted_content)
+
+    prefix_input_ids = tokenizer.encode(prompted_content, truncation=True,
+                                             max_length=100 - len(postfix_input_ids))
+
+    input_ids = torch.tensor([prefix_input_ids + postfix_input_ids])
+    mask = torch.tensor([[0] * len(prefix_input_ids) + [1] * len(postfix_input_ids)])
+
+    out = logits_labels_mask_to_loss(torch.tensor([[0.5] * (len(prefix_input_ids)+len(postfix_input_ids))]), input_ids, mask, verbose=True)
