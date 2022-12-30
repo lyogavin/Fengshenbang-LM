@@ -202,6 +202,7 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
 
         return loss
 
+    '''
     def training_epoch_end(self, training_step_outputs):
         print(f"\ntraining_epoch_end...")
         gathered = self.all_gather(training_step_outputs)
@@ -209,14 +210,16 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
             print(gathered)
             loss = sum(output['loss'].mean() for output in gathered) / len(training_step_outputs)
             print(f"train loss:{loss.item()}")
-
+    '''
     def validation_epoch_end(self, training_step_outputs):
         print(f"\nvalidation_epoch_end...")
+        '''
         gathered = self.all_gather(training_step_outputs)
         if self.global_rank == 0:
             print(gathered)
             loss = sum(output['loss'].mean() for output in gathered) / len(training_step_outputs)
             print(f"val loss:{loss.item()}")
+        '''
 
 
         #random.shuffle(training_step_outputs)

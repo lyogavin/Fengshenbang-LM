@@ -91,7 +91,6 @@ TRAINER_ARGS="
     --accumulate_grad_batches 8 \
     --gpus 4 \
     --num_nodes 1 \
-    --log_every_n_steps 1 \
     --strategy deepspeed_stage_2 \
     --default_root_dir $ROOT_DIR \
     --dirpath $checkpoint_path \
@@ -101,6 +100,10 @@ TRAINER_ARGS="
     --save_last \
     --check_val_every_n_epoch 1 \
 "
+
+#--log_every_n_steps 1 \
+
+
 #DATA_DIR=/cognitive_comp/wuziwei/task-data/medical_qa
 
 DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/
