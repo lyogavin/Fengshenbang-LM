@@ -157,6 +157,6 @@ if __name__ == '__main__':
     group.add_argument('--max-seq-length', type=int, default=1024)
     args = parser.parse_args()
 
-    testml = GPT2QADataset(datafile, 'medical_qa')#, args=args)
+    testml = GPT2QADataset(datafile, 'medical_qa', args=args)
 
     print(testml[10])
