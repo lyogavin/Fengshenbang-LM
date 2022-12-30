@@ -17,7 +17,7 @@ echo "RUN TS: $(run_ts)"
 
 echo "START TIME: $(date)"
 MICRO_BATCH_SIZE=1
-ROOT_DIR=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/bloomz/combined_highinter_template_suspence
+ROOT_DIR=/home/ubuntu/cloudfs_nfs/saved_models/deep_speed_experiments/bloomz/combined_highinter_template_suspence
 
 if [ ! -d ${ROOT_DIR} ];then
   mkdir -p ${ROOT_DIR}
@@ -108,8 +108,8 @@ DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/
 train_data_file=/home/ubuntu/cloudfs/ghost_data/combined_high_inter_template_suspences/combined_high_inter_template_suspences_train_1229_1672366480.csv
 val_data_file=/home/ubuntu/cloudfs/ghost_data/combined_high_inter_template_suspences/combined_high_inter_template_suspences_val_1229_1672366480.csv
 # for test training, only sampled 1000 lines
-train_data_file=/home/ubuntu/cloudfs/ghost_data/combined_high_inter_template_suspences/combined_high_inter_template_suspences_train_sample_1229_1672366480.csv
-val_data_file=/home/ubuntu/cloudfs/ghost_data/combined_high_inter_template_suspences/combined_high_inter_template_suspences_val_sample_1229_1672366480.csv
+#train_data_file=/home/ubuntu/cloudfs/ghost_data/combined_high_inter_template_suspences/combined_high_inter_template_suspences_train_sample_1229_1672366480.csv
+#val_data_file=/home/ubuntu/cloudfs/ghost_data/combined_high_inter_template_suspences/combined_high_inter_template_suspences_val_sample_1229_1672366480.csv
 
 DATA_ARGS="
     --data_dir $DATA_DIR \
