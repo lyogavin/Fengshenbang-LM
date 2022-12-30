@@ -180,7 +180,7 @@ if __name__ == '__main__':
         print(f"decoded encode: {deres}")
 
 
-    for i in range(100, 24, -1):
+    for i in range(100, 40, -1):
         print(f"\nfor max len: {i}")
         testml.max_seq_length = i
 
@@ -193,7 +193,7 @@ if __name__ == '__main__':
         print(f"decoded encode: {deres}")
 
 
-    for i in range(100, 24, -1):
+    for i in range(100, 40, -1):
         print(f"\nfor max len: {i}")
         testml.max_seq_length = i
 
