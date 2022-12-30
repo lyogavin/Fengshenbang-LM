@@ -272,7 +272,7 @@ def main(args):
         checkpoint_callback = GPT2FinetuneMedicalQAModelCheckpoint(
             args).callbacks
         logger = loggers.TensorBoardLogger(save_dir=os.path.join(
-            args.default_root_dir, 'log/'), name='MedicalQA-GPT2')
+            args.default_root_dir, 'log/'), name='bloomz_combined')
         trainer = Trainer.from_argparse_args(args,
                                              logger=logger,
                                              #evaluation_strategy='epoch',
