@@ -273,9 +273,9 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
 
 def main(args):
     # configure logging on module level, redirect to file
-    logger = logging.getLogger("pytorch_lightning.core")
+    #logger = logging.getLogger("pytorch_lightning.core")
 
-    logger.addHandler(logging.StreamHandler(sys.stdout))
+    #logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
     data_model = GPT2QADataModel(args)
