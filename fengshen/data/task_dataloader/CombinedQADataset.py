@@ -166,7 +166,7 @@ if __name__ == '__main__':
 
     for i in range(100, 15, -1):
         print(f"\nfor max len: {i}")
-        testml.max_seq_length = 100
+        testml.max_seq_length = i
 
         res = testml.encode({"title_type":"step2_high_inter_1229", 'content':'将数据转换成模型训练的输入将数据转换成模型训练的输入将数据转换成模型训练的输入', 'title':'将数据转换成模型训练的输入'})
 
