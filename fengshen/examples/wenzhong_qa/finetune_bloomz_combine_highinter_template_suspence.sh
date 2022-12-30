@@ -127,6 +127,7 @@ DATA_ARGS="
 PRETRAINED_MODEL_PATH=/home/ubuntu/cloudfs/saved_models/bigscience/bloomz-3b
 MODEL_ARGS="
     --pretrained_model_path ${PRETRAINED_MODEL_PATH} \
+    --enable_progress_bar True \
     --output_save_path $ROOT_DIR/predict.json \
     --learning_rate 1e-4 \
     --weight_decay 0.1 \
