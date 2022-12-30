@@ -88,7 +88,7 @@ export TORCH_EXTENSIONS_DIR=/home/ubuntu/cloudfs/torch_extendsions
 
 TRAINER_ARGS="
     --max_epochs 50 \
-    --gpus 2 \
+    --gpus 4 \
     --num_nodes 1 \
     --strategy deepspeed_stage_2 \
     --default_root_dir $ROOT_DIR \
