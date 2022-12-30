@@ -122,7 +122,7 @@ DATA_ARGS="
 "
 
 # PRETRAINED_MODEL_PATH=/cognitive_comp/wuziwei/pretrained_model_hf/gpt2
-PRETRAINED_MODEL_PATH=IDEA-CCNL/Wenzhong2.0-GPT2-3.5B-chinese
+PRETRAINED_MODEL_PATH=/home/ubuntu/cloudfs/saved_models/bigscience/bloomz-3b
 MODEL_ARGS="
     --pretrained_model_path ${PRETRAINED_MODEL_PATH} \
     --output_save_path $ROOT_DIR/predict.json \
