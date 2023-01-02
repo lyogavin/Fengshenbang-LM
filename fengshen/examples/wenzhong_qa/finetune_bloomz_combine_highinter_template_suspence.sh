@@ -17,7 +17,7 @@ echo "RUN TS: $(run_ts)"
 
 echo "START TIME: $(date)"
 MICRO_BATCH_SIZE=1
-ROOT_DIR=/home/ubuntu/cloudfs_nfs/saved_models/deep_speed_experiments/bloomz/combined_highinter_template_suspence
+ROOT_DIR=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/bloomz/combined_highinter_template_suspence
 
 if [ ! -d ${ROOT_DIR} ];then
   mkdir -p ${ROOT_DIR}
