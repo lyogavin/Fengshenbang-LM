@@ -183,29 +183,6 @@ if __name__ == '__main__':
     for testing_type in ["newrank_healthcare", "zhihu_search", "baidubaijia"]:
 
 
-        for i in range(100, 24, -1):
-            print(f"\nfor max len: {i}")
-            testml.max_seq_length = i
-
-            res = testml.encode({"data_type":"redbook_content_title",
-                                "source_category":testing_type, 'content':'将数据转换成模型训练的输入将数据转换成模型训练的输入将数据转换成模型训练的输入', 'title':'将数据转换成模型训练的输入'})
-
-            print(f"encode len: {res['input_ids'].shape}")
-            deres = testml.tokenizer.decode(res['input_ids'])
-            print(f"decoded encode: {deres}")
-
-
-        for i in range(100, 40, -1):
-            print(f"\nfor max len: {i}")
-            testml.max_seq_length = i
-
-            res = testml.encode({"data_type":"redbook_content_title","source_category":testing_type,
-                                 'content':'将数据转换成模型训练的输入将数据转换成模型训练的输入将数据转换成模型训练的输入', 'title':'将数据转换成模型训练的输入'})
-
-            print(f"encode len: {res['input_ids'].shape}")
-            deres = testml.tokenizer.decode(res['input_ids'])
-            print(f"decoded encode: {deres}")
-
 
         for i in range(100, 40, -1):
             print(f"\nfor max len: {i}")
