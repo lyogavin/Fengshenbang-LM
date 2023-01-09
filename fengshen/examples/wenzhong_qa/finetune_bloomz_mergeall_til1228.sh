@@ -138,7 +138,7 @@ MODEL_ARGS="
     --run_ts ${run_ts} \
 "
 
-SCRIPTS_PATH=/home/ubuntu/cloudfs/Fengshenbang-LM/fengshen/examples/wenzhong_qa/finetune_bloomz_combined.py
+SCRIPTS_PATH=/home/ubuntu/cloudfs/Fengshenbang-LM/fengshen/examples/wenzhong_qa/finetune_bloomz_merge_all_til1228.py
 
 export CMD=" \
     $SCRIPTS_PATH \
