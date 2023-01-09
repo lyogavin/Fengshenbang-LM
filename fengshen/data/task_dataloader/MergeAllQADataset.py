@@ -216,11 +216,12 @@ if __name__ == '__main__':
         deres = testml.tokenizer.decode(res['input_ids'])
         print(f"decoded encode: {deres}")
 
+    from tqdm import tqdm
 
     print(f"test iterate through all train data...")
     testml = GPT2QADataset("/home/ubuntu/cloudfs/ghost_data/merge_all_add_1208_1228//merge_all_0108_train_1673194850.csv", 'medical_qa', args=args)
 
-    for x in testml:
+    for x in tqdm(testml, total=len(testml)):
         abc = x
 
     print(f"test iterate through all val data...")
@@ -228,5 +229,5 @@ if __name__ == '__main__':
         "/home/ubuntu/cloudfs/ghost_data/merge_all_add_1208_1228//merge_all_0108_val_1673194850.csv",
         'medical_qa', args=args)
 
-    for x in testml:
+    for x in tqdm(testml, total=len(testml)):
         abc = x
