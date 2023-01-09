@@ -100,6 +100,7 @@ class GPT2QADataset(Dataset):
 
         max_length_left = self.max_seq_length - len(postfix_input_ids)
         max_length_left = min(3,max_length_left)
+        print(f"max_length_left:{max_length_left}")
         prefix_input_ids = self.tokenizer.encode(prompted_content, truncation=True, max_length=max_length_left)
 
 
@@ -205,6 +206,7 @@ if __name__ == '__main__':
         title = ['数'] * title_len
         title = ''.join(title)
         testml.max_seq_length = 100
+        print(f"title len:{title_len}")
 
         res = testml.encode({"data_type":"redbook_content_title",
                              "source_category":"newrank_healthcare",
