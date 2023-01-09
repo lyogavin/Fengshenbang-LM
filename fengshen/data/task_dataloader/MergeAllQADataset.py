@@ -220,5 +220,5 @@ if __name__ == '__main__':
     print(f"test iterate through all train data...")
     testml = GPT2QADataset("/home/ubuntu/cloudfs/ghost_data/merge_all_add_1208_1228//merge_all_0108_train_1673194850.csv", 'medical_qa', args=args)
 
-    for x in testml
+    for x in testml:
         abc = x
