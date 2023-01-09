@@ -221,8 +221,8 @@ if __name__ == '__main__':
     print(f"test iterate through all train data...")
     testml = GPT2QADataset("/home/ubuntu/cloudfs/ghost_data/merge_all_add_1208_1228//merge_all_0108_train_1673194850.csv", 'medical_qa', args=args)
 
-    dl = DataLoader(testml, batch_size=4, num_workers=32,pin_memory=False)
-    for x in tqdm(dl, total=len(testml) // 16):
+    #dl = DataLoader(testml, batch_size=4, num_workers=32,pin_memory=False)
+    for x in tqdm(testml, total=len(testml) // 16):
         abc = x
 
     print(f"test iterate through all val data...")
@@ -230,6 +230,6 @@ if __name__ == '__main__':
         "/home/ubuntu/cloudfs/ghost_data/merge_all_add_1208_1228//merge_all_0108_val_1673194850.csv",
         'medical_qa', args=args)
 
-    dl = DataLoader(testml, batch_size=4, num_workers=32,pin_memory=False)
-    for x in tqdm(dl, total=len(testml)//16):
+    #dl = DataLoader(testml, batch_size=4, num_workers=32,pin_memory=False)
+    for x in tqdm(testml, total=len(testml)//16):
         abc = x
