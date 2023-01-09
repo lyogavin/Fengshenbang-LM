@@ -99,7 +99,7 @@ class GPT2QADataset(Dataset):
         postfix_input_ids = self.tokenizer.encode(postfix_prompted_content)
 
         max_length_left = self.max_seq_length - len(postfix_input_ids)
-        max_length_left = min(3,max_length_left)
+        max_length_left = max(3,max_length_left)
         print(f"max_length_left:{max_length_left}")
         prefix_input_ids = self.tokenizer.encode(prompted_content, truncation=True, max_length=max_length_left)
 
