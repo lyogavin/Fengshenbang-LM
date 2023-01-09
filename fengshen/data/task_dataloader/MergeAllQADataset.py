@@ -89,7 +89,9 @@ class GPT2QADataset(Dataset):
                 assert False, f"{row['data_type']}, {row['source_category']}"
 
         postfix_prompted_content = f"]\n符合以上内容的{get_promote_title_type(item)}标题：[{item['title']}]\n"
-        prompted_content = f"你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n自媒体创作者：\n需要起标题的内容：[{item['content']}"
+
+        truncated_content = item['content'][:120]
+        prompted_content = f"你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n自媒体创作者：\n需要起标题的内容：[{truncated_content}"
 
 
 
