@@ -71,7 +71,7 @@ class GPT2QADataset(Dataset):
         """
 
         def get_promote_title_type(row):
-            if row['data_type'] == 'redbook_tags_title':
+            if row['data_type'] in ['redbook_tags_title', 'redbook_tags_title_top2_sim']:
                 return f"小红书"
             elif row['source_category'] in ['newrank_healthcare', 'newred_0905','redbook_0707', 'redbook_1228']:
                 return f"小红书"
@@ -86,10 +86,10 @@ class GPT2QADataset(Dataset):
             elif row['source_category'] in ['taobao_jd']:
                 return f"电商"
             else:
-                assert False
+                assert False, f"{row['data_type']}, {row['source_category']}"
 
-        postfix_prompted_content = f"]\n{get_promote_title_type(item)}标题：[{item['title']}]"
-        prompted_content = f"你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n需要起标题的内容：[{item['content']}"
+        postfix_prompted_content = f"]\n符合以上内容的{get_promote_title_type(item)}标题：[{item['title']}]\n"
+        prompted_content = f"你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n自媒体创作者：\n需要起标题的内容：[{item['content']}"
 
 
 
