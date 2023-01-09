@@ -88,16 +88,19 @@ class GPT2QADataset(Dataset):
             else:
                 assert False, f"{row['data_type']}, {row['source_category']}"
 
-        postfix_prompted_content = f"]\n符合以上内容的{get_promote_title_type(item)}标题：[{item['title']}]\n"
+        truncated_title = item['title']
+        truncated_title = truncated_title[:120] if isinstance(truncated_title,str) else ' '
+        postfix_prompted_content = f"]\n符合以上内容的{get_promote_title_type(item)}标题：[{truncated_title}]\n"
 
-        truncated_content = item['content'][:120]
-        prompted_content = f"你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n自媒体创作者：\n需要起标题的内容：[{truncated_content}"
+        prompted_content = f"你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n自媒体创作者：\n需要起标题的内容：[{item['content']}"
 
 
 
         postfix_input_ids = self.tokenizer.encode(postfix_prompted_content)
 
-        prefix_input_ids = self.tokenizer.encode(prompted_content, truncation=True, max_length=self.max_seq_length - len(postfix_input_ids))
+        max_length_left = self.max_seq_length - len(postfix_input_ids)
+        max_length_left = min(3,max_length_left)
+        prefix_input_ids = self.tokenizer.encode(prompted_content, truncation=True, max_length=max_length_left)
 
 
         input_ids = torch.tensor([prefix_input_ids + postfix_input_ids])
@@ -196,3 +199,17 @@ if __name__ == '__main__':
             print(f"encode len: {res['input_ids'].shape}")
             deres = testml.tokenizer.decode(res['input_ids'])
             print(f"decoded encode: {deres}")
+
+
+    for title_len in range(80, 150):
+        title = ['数'] * title_len
+        title = ''.join(title)
+        testml.max_seq_length = 100
+
+        res = testml.encode({"data_type":"redbook_content_title",
+                             "source_category":"newrank_healthcare",
+                             'content':'将数据转换成模型训练的输入将数据转换成模型训练的输入将数据转换成模型训练的输入', 'title':title})
+
+        print(f"encode len: {res['input_ids'].shape}")
+        deres = testml.tokenizer.decode(res['input_ids'])
+        print(f"decoded encode: {deres}")
