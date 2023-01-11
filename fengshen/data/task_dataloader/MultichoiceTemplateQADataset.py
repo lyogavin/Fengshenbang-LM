@@ -157,7 +157,7 @@ class GPT2QADataModel(pl.LightningDataModule):
 if __name__ == '__main__':
     import argparse
     #modelfile = '/cognitive_comp/wuziwei/pretrained_model_hf/medical_v2'
-    datafile = '/home/ubuntu/cloudfs/ghost_data/merge_all_add_1208_1228//merge_all_0108_val_sample_1673194850.csv'
+    datafile = '/home/ubuntu/cloudfs/ghost_data/merge_all_add_1208_1228//merge_all_0108_with_multichoice_scores_and_templates_val_sample_1673194850.csv.tgz'
     parser = argparse.ArgumentParser(description='hf test', allow_abbrev=False)
     group = parser.add_argument_group(title='test args')
     group.add_argument('--pretrained-model-path', type=str, default="/home/ubuntu/cloudfs/saved_models/bigscience/bloomz-3b",
