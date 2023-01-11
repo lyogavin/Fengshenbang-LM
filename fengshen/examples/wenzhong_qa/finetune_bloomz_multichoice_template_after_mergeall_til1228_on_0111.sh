@@ -113,8 +113,8 @@ DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/
 train_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_add_1208_1228//merge_all_0108_with_multichoice_scores_and_templates_train_1673194850.csv.tgz
 val_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_add_1208_1228//merge_all_0108_with_multichoice_scores_and_templates_val_1673194850.csv.tgz
 # for test training, only sampled 1000 lines
-train_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_add_1208_1228//merge_all_0108_with_multichoice_scores_and_templates_train_sample_1673194850.csv.tgz
-val_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_add_1208_1228//merge_all_0108_with_multichoice_scores_and_templates_val_sample_1673194850.csv.tgz
+#train_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_add_1208_1228//merge_all_0108_with_multichoice_scores_and_templates_train_sample_1673194850.csv.tgz
+#val_data_file=/home/ubuntu/cloudfs/ghost_data/merge_all_add_1208_1228//merge_all_0108_with_multichoice_scores_and_templates_val_sample_1673194850.csv.tgz
 
 DATA_ARGS="
     --data_dir $DATA_DIR \
