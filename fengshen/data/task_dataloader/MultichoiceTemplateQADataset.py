@@ -168,6 +168,9 @@ if __name__ == '__main__':
     testml = GPT2QADataset(datafile, 'medical_qa', args=args)
 
     print(testml[10])
+    print(testml.tokenizer.decode(testml[10]['input_ids']))
+    print(testml.tokenizer.decode(testml[23]['input_ids']))
+    print(testml.tokenizer.decode(testml[17]['input_ids']))
     print(len(testml))
     print(f"max len:{testml.max_seq_length}")
 
@@ -180,6 +183,7 @@ if __name__ == '__main__':
             testml.max_seq_length = i
 
             res = testml.encode({"data_type":"redbook_content_title",
+                                 "title_template_name":'制造悬念感',
                                  "source_category":testing_type, 'content':'将数据转换成模型训练的输入将数据转换成模型训练的输入将数据转换成模型训练的输入', 'title':'将数据转换成模型训练的输入'})
 
             print(f"encode len: {res['input_ids'].shape}")
@@ -195,6 +199,7 @@ if __name__ == '__main__':
 
         res = testml.encode({"data_type":"redbook_content_title",
                              "source_category":"newrank_healthcare",
+                                 "title_template_name":'权威/内部人士/过来人身份推荐背书',
                              'content':'将数据转换成模型训练的输入将数据转换成模型训练的输入将数据转换成模型训练的输入', 'title':title})
 
         print(f"encode len: {res['input_ids'].shape}")
