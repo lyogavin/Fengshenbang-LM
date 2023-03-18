@@ -113,8 +113,8 @@ DATA_DIR=/home/ubuntu/cloudfs/ghost_data/merge_all_title_content/
 train_data_file=/home/ubuntu/cloudfs/ghost_data/newred_redbook_link_download/api_0305_download/all_merged_til0305_cleanedup_train_1679092112.csv.tgz
 val_data_file=/home/ubuntu/cloudfs/ghost_data/newred_redbook_link_download/api_0305_download/all_merged_til0305_cleanedup_val_1679092112.csv.tgz
 # for test training, only sampled 1000 lines
-train_data_file=/home/ubuntu/cloudfs/ghost_data/newred_redbook_link_download/api_0305_download/all_merged_til0305_cleanedup_train_sample_1679092112.csv.tgz
-val_data_file=/home/ubuntu/cloudfs/ghost_data/newred_redbook_link_download/api_0305_download/all_merged_til0305_cleanedup_val_sample_1679092112.csv.tgz
+#train_data_file=/home/ubuntu/cloudfs/ghost_data/newred_redbook_link_download/api_0305_download/all_merged_til0305_cleanedup_train_sample_1679092112.csv.tgz
+#val_data_file=/home/ubuntu/cloudfs/ghost_data/newred_redbook_link_download/api_0305_download/all_merged_til0305_cleanedup_val_sample_1679092112.csv.tgz
 
 DATA_ARGS="
     --data_dir $DATA_DIR \
