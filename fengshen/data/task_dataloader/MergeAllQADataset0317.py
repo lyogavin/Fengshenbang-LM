@@ -70,7 +70,7 @@ class GPT2QADataset(Dataset):
         将数据转换成模型训练的输入
         """
 
-        def get_promote_title_type(row):
+        def get_promote_title_type_old_pre_0317(row):
             if row['data_type'] in ['redbook_tags_title', 'redbook_tags_title_top2_sim']:
                 return f"小红书"
             elif row['source_category'] in ['newrank_healthcare', 'newred_0905','redbook_0707', 'redbook_1228']:
@@ -89,7 +89,7 @@ class GPT2QADataset(Dataset):
                 assert False, f"{row['data_type']}, {row['source_category']}"
 
 
-        def get_promote_title_type_0317(row):
+        def get_promote_title_type(row):
             # by data type first
             if row['data_type'] in ['redbook_tags_title', 'redbook_tags_title_top2_sim']:
                 return f"小红书"
