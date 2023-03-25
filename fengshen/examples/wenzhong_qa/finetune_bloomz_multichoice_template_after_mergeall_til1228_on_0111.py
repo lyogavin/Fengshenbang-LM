@@ -290,14 +290,14 @@ def main(args):
         checkpoint_callback = GPT2FinetuneMedicalQAModelCheckpoint(
             args).callbacks
         logger = loggers.TensorBoardLogger(save_dir=os.path.join(
-            args.default_root_dir, 'log/'), name='bloomz_combined')
+            args.default_root_dir, 'log/'), name='bloomz_multichoice')
 
-        #wanddb_logger = loggers.WandbLogger(save_dir=os.path.join(
-        #    args.default_root_dir, 'log/'), name='bloomz_combined')
+        wanddb_logger = loggers.WandbLogger(save_dir=os.path.join(
+            args.default_root_dir, 'log/'), name='bloomz_multichoice')
         csv_logger = loggers.CSVLogger(save_dir=os.path.join(
-            args.default_root_dir, 'log/'), name='bloomz_combined')
+            args.default_root_dir, 'log/'), name='bloomz_multichoice')
         trainer = Trainer.from_argparse_args(args,
-                                             logger=[logger,csv_logger],
+                                             logger=[logger,csv_logger, wanddb_logger],
                                              #evaluation_strategy='epoch',
                                              callbacks=[checkpoint_callback]
                                              )
@@ -308,9 +308,9 @@ def main(args):
         #     for line in result:
         #         w.writelines(line)
 
-        model.model.save_pretrained(os.path.join(args.default_root_dir, f"bloomz_combined_finetune_{args.run_ts}"))
+        model.model.save_pretrained(os.path.join(args.default_root_dir, f"bloomz_multichoice_finetune_{args.run_ts}"))
            # '/cognitive_comp/wuziwei/pretrained_model_hf')
-        print(f'model saved: {os.path.join(args.default_root_dir, f"bloomz_combined_finetune_{args.run_ts}")}')
+        print(f'model saved: {os.path.join(args.default_root_dir, f"bloomz_multichoice_finetune_{args.run_ts}")}')
     else:
         print('save to hf.....')
         trainer = Trainer.from_argparse_args(args)
