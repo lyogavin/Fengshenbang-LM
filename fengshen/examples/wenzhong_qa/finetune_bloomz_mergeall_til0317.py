@@ -221,31 +221,35 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
             print(f"val loss:{loss.item()}")
         '''
 
+        if self.global_rank == 0:
+            try:
 
-        #random.shuffle(training_step_outputs)
-        #for bi, batch in enumerate(training_step_outputs):
-        #    print(f"--{bi}/{len(training_step_outputs)}--- input text: {batch['prompt']}")
-        #    prediction = generate_agent_paraphrase(self.model, self.tokenizer, batch['prompt_input_ids'])
-        #    print(f"validation_samples:\nlabels: {batch['prompted_content']}\npredictions: {prediction}")
+                #random.shuffle(training_step_outputs)
+                #for bi, batch in enumerate(training_step_outputs):
+                #    print(f"--{bi}/{len(training_step_outputs)}--- input text: {batch['prompt']}")
+                #    prediction = generate_agent_paraphrase(self.model, self.tokenizer, batch['prompt_input_ids'])
+                #    print(f"validation_samples:\nlabels: {batch['prompted_content']}\npredictions: {prediction}")
 
-        torch.cuda.empty_cache()
-        additional_cases = ["你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n自媒体创作者：\n需要起标题的内容：[暗黑系美甲]\n符合以上内容的小红书标题：[",
-                            "你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n自媒体创作者：\n需要起标题的内容：[扫地机器人]\n符合以上内容的小红书标题：[",
-                            "你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n自媒体创作者：\n需要起标题的内容：[草原羊肉]\n符合以上内容的小红书标题：[",
-                            "你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n自媒体创作者：\n需要起标题的内容：[真无线蓝牙耳机]\n符合以上内容的小红书标题：["]
-        for bi, item in enumerate(additional_cases):
-            print(f"--{bi}/{len(additional_cases)}--- input text: {item}")
+                torch.cuda.empty_cache()
+                additional_cases = ["你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n自媒体创作者：\n需要起标题的内容：[暗黑系美甲]\n符合以上内容的小红书标题：[",
+                                    "你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n自媒体创作者：\n需要起标题的内容：[扫地机器人]\n符合以上内容的小红书标题：[",
+                                    "你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n自媒体创作者：\n需要起标题的内容：[草原羊肉]\n符合以上内容的小红书标题：[",
+                                    "你是自媒体创作者，需要根据指定内容，撰写适合指定平台的爆款标题。\n自媒体创作者：\n需要起标题的内容：[真无线蓝牙耳机]\n符合以上内容的小红书标题：["]
+                for bi, item in enumerate(additional_cases):
+                    print(f"--{bi}/{len(additional_cases)}--- input text: {item}")
 
-            prompt_inputs_dict = self.tokenizer.batch_encode_plus([item],
-                                                            max_length=100, padding=False,
-                                                            truncation=True, return_tensors='pt')
+                    prompt_inputs_dict = self.tokenizer.batch_encode_plus([item],
+                                                                    max_length=100, padding=False,
+                                                                    truncation=True, return_tensors='pt')
 
-            prompt_inputs_ids = prompt_inputs_dict['input_ids'].to("cuda")
-            #print(f"shape prompt_inputs_ids: {prompt_inputs_ids.shape}")
-            prediction = generate_agent_paraphrase(self.model, self.tokenizer, prompt_inputs_ids)
-            print(f"validation_samples:\npredictions: {prediction}")
+                    prompt_inputs_ids = prompt_inputs_dict['input_ids'].to("cuda")
+                    #print(f"shape prompt_inputs_ids: {prompt_inputs_ids.shape}")
+                    prediction = generate_agent_paraphrase(self.model, self.tokenizer, prompt_inputs_ids)
+                    print(f"validation_samples:\npredictions: {prediction}")
 
-            torch.cuda.empty_cache()
+                    torch.cuda.empty_cache()
+            except Exception as ex:
+                print(f"err: {ex}...")
 
     def configure_optimizers(self):
         no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
@@ -292,12 +296,12 @@ def main(args):
         logger = loggers.TensorBoardLogger(save_dir=os.path.join(
             args.default_root_dir, 'log/'), name='bloomz_combined')
 
-        #wanddb_logger = loggers.WandbLogger(save_dir=os.path.join(
-        #    args.default_root_dir, 'log/'), name='bloomz_combined')
+        wanddb_logger = loggers.WandbLogger(save_dir=os.path.join(
+            args.default_root_dir, 'log/'), name='bloomz_combined')
         csv_logger = loggers.CSVLogger(save_dir=os.path.join(
             args.default_root_dir, 'log/'), name='bloomz_combined')
         trainer = Trainer.from_argparse_args(args,
-                                             logger=[logger,csv_logger],
+                                             logger=[logger,csv_logger, wanddb_logger],
                                              #evaluation_strategy='epoch',
                                              callbacks=[checkpoint_callback]
                                              )

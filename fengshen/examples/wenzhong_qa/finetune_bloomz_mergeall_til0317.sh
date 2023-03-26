@@ -20,7 +20,7 @@ MICRO_BATCH_SIZE=1
 ROOT_DIR=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/bloomz/merge_all_til0317
 
 if [ ! -d ${ROOT_DIR} ];then
-  mkdir -p ${ROOT_DIR}
+  mkdir -p ${ROOT_DIR}/log
   echo ${ROOT_DIR} created!!!!!!!!!!!!!!
 else
   echo ${ROOT_DIR} exist!!!!!!!!!!!!!!!
@@ -149,7 +149,7 @@ export CMD=" \
 
 echo $CMD
 
-python $CMD
+python $CMD 2>&1 | tee ${ROOT_DIR}/log/output.log
 
 #SINGULARITY_PATH=/cognitive_comp/wuziwei/container/oneflow-cuda11.sif
 # singularity exec --nv -B /cognitive_comp/wuziwei/:/cognitive_comp/wuziwei/ $SINGULARITY_PATH python $CMD
