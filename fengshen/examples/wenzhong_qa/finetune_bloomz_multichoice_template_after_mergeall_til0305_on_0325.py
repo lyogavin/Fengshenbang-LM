@@ -155,11 +155,11 @@ class GPT2FinetuneMedicalQA(pl.LightningModule):
         self.model = BloomForCausalLM.from_pretrained(
             args.pretrained_model_path)
 
-            if args.load_checkpoint_state is not None:
-                state_dict = torch.load(args.load_checkpoint_state, map_location=torch.device('cpu'))
-                self.model.load_state_dict({k[len('module.model.'):]: v for k, v in state_dict['module'].items()})
-                del state_dict
-                torch.cuda.empty_cache()
+        if args.load_checkpoint_state is not None:
+            state_dict = torch.load(args.load_checkpoint_state, map_location=torch.device('cpu'))
+            self.model.load_state_dict({k[len('module.model.'):]: v for k, v in state_dict['module'].items()})
+            del state_dict
+            torch.cuda.empty_cache()
 
     def setup(self, stage) -> None:
         if stage == 'fit':
