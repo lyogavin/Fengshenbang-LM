@@ -128,8 +128,10 @@ DATA_ARGS="
 
 # PRETRAINED_MODEL_PATH=/cognitive_comp/wuziwei/pretrained_model_hf/gpt2
 PRETRAINED_MODEL_PATH=/home/ubuntu/cloudfs/saved_models/bigscience/bloomz-3b
+LOAD_CHKP_STATE=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/bloomz/merge_all_til0317/ckpt_1679115166/model-epoch=00-train_loss=0.4561.ckpt/checkpoint/mp_rank_00_model_states.pt
 MODEL_ARGS="
     --pretrained_model_path ${PRETRAINED_MODEL_PATH} \
+    --load_checkpoint_state ${LOAD_CHKP_STATE} \
     --enable_progress_bar True \
     --output_save_path $ROOT_DIR/predict.json \
     --learning_rate 1e-4 \
@@ -138,7 +140,7 @@ MODEL_ARGS="
     --run_ts ${run_ts} \
 "
 
-SCRIPTS_PATH=/home/ubuntu/cloudfs/Fengshenbang-LM/fengshen/examples/wenzhong_qa/finetune_bloomz_multichoice_template_after_mergeall_til1228_on_0111.py
+SCRIPTS_PATH=/home/ubuntu/cloudfs/Fengshenbang-LM/fengshen/examples/wenzhong_qa/finetune_bloomz_multichoice_template_after_mergeall_til0305_on_0325.py
 
 export CMD=" \
     $SCRIPTS_PATH \
