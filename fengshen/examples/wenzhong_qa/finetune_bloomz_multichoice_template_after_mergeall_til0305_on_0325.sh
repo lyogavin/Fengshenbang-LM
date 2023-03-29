@@ -128,7 +128,7 @@ DATA_ARGS="
 
 # PRETRAINED_MODEL_PATH=/cognitive_comp/wuziwei/pretrained_model_hf/gpt2
 PRETRAINED_MODEL_PATH=/home/ubuntu/cloudfs/saved_models/bigscience/bloomz-3b
-LOAD_CHKP_STATE=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/bloomz/merge_all_til0317/ckpt_1679115166/model-epoch=00-train_loss=0.4561.ckpt/checkpoint/mp_rank_00_model_states.pt
+LOAD_CHKP_STATE=/home/ubuntu/cloudfs/saved_models/deep_speed_experiments/bloomz/merge_all_til0317/ckpt_1679799108/model-epoch\=00-train_loss\=0.4555.ckpt/checkpoint/mp_rank_00_model_states.pt
 MODEL_ARGS="
     --pretrained_model_path ${PRETRAINED_MODEL_PATH} \
     --load_checkpoint_state ${LOAD_CHKP_STATE} \
@@ -151,7 +151,7 @@ export CMD=" \
 
 echo $CMD
 
-python $CMD
+python $CMD 2>&1 | tee ${ROOT_DIR}/log/output.log
 
 #SINGULARITY_PATH=/cognitive_comp/wuziwei/container/oneflow-cuda11.sif
 # singularity exec --nv -B /cognitive_comp/wuziwei/:/cognitive_comp/wuziwei/ $SINGULARITY_PATH python $CMD
